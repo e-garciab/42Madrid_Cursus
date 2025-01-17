@@ -6,7 +6,7 @@
 /*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:40:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/16 17:43:13 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:25:29 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	ft_isalpha(int c); OK
 int	ft_isdigit(int c); OK
 int	ft_isalnum(int c); OK
-int	ft_isascii(int c);
-int	ft_isprint(int c);
+int	ft_isascii(int c); duda-sale siempre 1
+int	ft_isprint(int c); OK
 
 /* #include <string.h> */
 
