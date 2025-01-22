@@ -1,32 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:24:22 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/21 16:28:13 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/21 15:37:04 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/21 17:22:42 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (c  - 32); 
-	else
-		return (c);
-}
-
-#include <ctype.h> 
 #include <stdio.h>
+#include <string.h>
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t			i;
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = c;
+		i++;
+	}
+	return (s);
+}
 
 int	main(void)
 {
-	int	c;
-
-	c = 'n';
-	printf("%c\n", toupper(c));
-	printf("%c", ft_toupper(c));
+	char s[50] = "hola";
+	printf("Cadena original: %s\n", s);
+	ft_memset(s+2, '*', 2);
+	printf("Cadena modificada: %s\n", s);
 	return (0);
 }

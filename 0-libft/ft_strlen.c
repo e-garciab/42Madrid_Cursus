@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:24:22 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/21 16:28:13 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/20 11:20:54 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/21 12:26:52 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
-{
-	if (c >= 97 && c <= 122)
-		return (c  - 32); 
-	else
-		return (c);
-}
+#include <stdio.h> /*necesaria para usar el tipo de dato size_t*/
 
-#include <ctype.h> 
-#include <stdio.h>
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+/*
+#include <string.h>
 
 int	main(void)
 {
-	int	c;
+	const char	s[] = "Hello World!";
 
-	c = 'n';
-	printf("%c\n", toupper(c));
-	printf("%c", ft_toupper(c));
+	printf("%lu\n", strlen(s));
+	printf("%lu", ft_strlen(s));
 	return (0);
-}
+}*/

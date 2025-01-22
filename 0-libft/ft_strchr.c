@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:24:22 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/21 16:28:13 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/21 18:04:54 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/21 18:32:49 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include <string.h>
+#include <stdio.h>
+
+char	*ft_strchr(const char *s, int c)
 {
-	if (c >= 97 && c <= 122)
-		return (c  - 32); 
-	else
-		return (c);
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == c)
+			return (*s);
+		else
+			i++;
+	}
+	return (NULL);
 }
 
-#include <ctype.h> 
-#include <stdio.h>
+
 
 int	main(void)
 {
-	int	c;
-
-	c = 'n';
-	printf("%c\n", toupper(c));
-	printf("%c", ft_toupper(c));
+	const char str[] = "Hola mundo";
+	printf("%s\n", strchr(str, 'm'));
+	printf("%s\n", ft_strchr(str, 'm'));
 	return (0);
 }

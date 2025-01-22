@@ -1,32 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:24:22 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/21 16:28:13 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/20 12:10:13 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/21 12:26:51 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include <stdio.h>
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	if (c >= 97 && c <= 122)
-		return (c  - 32); 
-	else
-		return (c);
+	size_t i;
+	
+	i = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (i < size - 1 && src[i] != '\0')
+	{
+		dst[i] = src[i];			
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
 
-#include <ctype.h> 
-#include <stdio.h>
-
+/*
 int	main(void)
 {
-	int	c;
+	const char	src[] = "Hola Mundo";
+	char	dst[20];
+	size_t size = 10;
 
-	c = 'n';
-	printf("%c\n", toupper(c));
-	printf("%c", ft_toupper(c));
+	printf("%zu\n", ft_strlcpy(dst, src, size));
+	printf("%s\n", dst);
 	return (0);
 }
+*/
