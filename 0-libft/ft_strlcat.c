@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:16:24 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/21 14:00:01 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:23:57 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (len + ft_strlen(src));
 }
 
-/*
+
 int	main(void)
 {
 	char dst[30] = "hola";
@@ -47,4 +47,3 @@ int	main(void)
 	printf("%s\n", dst);
 	return (0);
 }
-*/
