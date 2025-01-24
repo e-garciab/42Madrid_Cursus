@@ -11,16 +11,18 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
-
-	
+    ft_memset (s, 0, n);
 }
 
 int	main(void)
 {
-
-
+	char s[50] = "hola";
+	ft_bzero(s, 2);
+    printf("Cadena modificada %s\n", s);
+	return (0);
 }

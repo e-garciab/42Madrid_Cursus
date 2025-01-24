@@ -49,7 +49,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
-/*
+
 int	main(void)
 {
 	const char *big = "FoBBo Bar Baz";
@@ -62,4 +62,3 @@ int	main(void)
 	printf("%s\n", ft_strnstr(big, little, 12));
 	return (0);
 }
-*/
