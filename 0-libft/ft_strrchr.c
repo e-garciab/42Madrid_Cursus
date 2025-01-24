@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:35:21 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/22 13:37:56 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:07:28 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ char	*ft_strrchr(const char *s, int c)
 			i--;
 	return (NULL);
 }
-
-
-
 
 
 int	main(void)
