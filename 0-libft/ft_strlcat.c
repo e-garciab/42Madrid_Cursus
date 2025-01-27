@@ -39,9 +39,9 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 int	main(void)
 {
-	char dst[30] = "hola";
+	char dst[30] = "\0";
 	const char src[] = " mundo";
-	size_t size = 10;
+	size_t size = 0;
 
 	printf("%lu\n", ft_strlcat(dst, src, size));
 	printf("%s\n", dst);
