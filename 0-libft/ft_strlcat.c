@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:16:24 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/22 11:23:57 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:33:17 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	j;
 	size_t	len;
 
-
 	j = 0;
 	len = ft_strlen(dst);
 	i = len;
-
 	if (size < len)
 		return (size + ft_strlen(src));
 	while (src[j] != '\0' && i < size - 1)
@@ -36,14 +34,15 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (len + ft_strlen(src));
 }
 
-
+/*
 int	main(void)
 {
-	char dst[30] = "\0";
-	const char src[] = " mundo";
-	size_t size = 0;
+	char		dst[30] = "\0";
+	const char	src[] = " mundo";
+	size_t		size = 0;
 
 	printf("%lu\n", ft_strlcat(dst, src, size));
 	printf("%s\n", dst);
 	return (0);
 }
+*/

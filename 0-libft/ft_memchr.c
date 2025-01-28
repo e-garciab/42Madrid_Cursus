@@ -1,34 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 12:26:35 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 18:46:50 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/28 12:16:50 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/28 13:02:26 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
+#include <string.h>
 #include <stdio.h>
 
-int	ft_tolower(int c)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (c >= 65 && c <= 90)
-		return (c + 32);
-	else
-		return (c);
+	const unsigned char	*str;
+	size_t				i;
+
+	str = (const unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (str[i] == c)
+			return ((void *)&str[i]);
+		else
+			i++;
+	}
+	return (NULL);
 }
 
 /*
 int	main(void)
 {
-	int	c;
+	const char	str[20] = "hola mundo";
+	int			c = 'l';
+	size_t		n = 4;
+	char		*result = ft_memchr (str, c, n);
 
-	c = 80;
-	printf("%d\n", tolower(c));
-	printf("%d", ft_tolower(c));
+	printf ("%s\n", result);
 	return (0);
 }
 */

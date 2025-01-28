@@ -6,9 +6,12 @@
 /*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:13:06 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/17 12:16:00 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:20:23 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <ctype.h>
+#include <stdio.h>
 
 int	ft_isprint(int c)
 {
@@ -19,9 +22,7 @@ int	ft_isprint(int c)
 	return (0);
 }
 
-#include <ctype.h>
-#include <stdio.h>
-
+/*
 int	main(void)
 {
 	int	c;
@@ -31,3 +32,4 @@ int	main(void)
 	printf("%d", ft_isprint(c));
 	return (0);
 }
+*/

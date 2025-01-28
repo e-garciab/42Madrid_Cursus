@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 15:37:04 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/22 13:33:08 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:22:04 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ void	*ft_memset(void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		ptr[i] = c; // aquí implicitamente se convierte c en unsigned char
+		ptr[i] = c;
 		i++;
 	}
 	return (s);
 }
 
+/*
 int	main(void)
 {
 	char s[50] = "hola";
@@ -36,3 +37,4 @@ int	main(void)
 	printf("Cadena modificada: %s\n", s);
 	return (0);
 }
+*/

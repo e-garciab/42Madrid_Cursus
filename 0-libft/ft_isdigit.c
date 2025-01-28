@@ -6,9 +6,12 @@
 /*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:57:33 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/16 17:23:15 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:33:28 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <ctype.h>
+#include <stdio.h>
 
 int	ft_isdigit(int c)
 {
@@ -19,9 +22,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-#include <ctype.h>
-#include <stdio.h>
-
+/*
 int	main(void)
 {
 	int	c;
@@ -31,6 +32,4 @@ int	main(void)
 	printf("%d", ft_isdigit(c));
 	return (0);
 }
-
- /* Devuelve "verdadero" (un valor distinto de cero) si el carácter está entre 0 y 9.
-Devuelve 0 en caso contrario */
+*/

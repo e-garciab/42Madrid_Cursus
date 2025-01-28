@@ -1,43 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/20 12:10:13 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 18:36:29 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/28 13:03:05 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/28 13:49:00 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <stdio.h>
-#include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	i;
+	const unsigned char	*str1;
+	const unsigned char	*str2;
+	size_t				i;
 
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
 	i = 0;
-	if (size == 0)
-		return (ft_strlen(src));
-	while (i < size - 1 && src[i] != '\0')
+	while (i < n)
 	{
-		dst[i] = src[i];
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
 		i++;
 	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	return (0);
 }
 
 /*
 int	main(void)
 {
-	const char	src[] = "Hola Mundo";
-	char	dst[20];
-	size_t size = 10;
+	const char	str1[20] = "hola mundo";
+	const char	str2[20] = "adios mundo";
+	size_t		n = 5;
+	int			result = ft_memcmp (str1, str2, n);
 
-	printf("%zu\n", ft_strlcpy(dst, src, size));
-	printf("%s\n", dst);
+	printf ("%d\n", result);anch is up to date with 'origin/mas
 	return (0);
 }
 */

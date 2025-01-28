@@ -6,9 +6,12 @@
 /*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 10:21:51 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/16 17:19:22 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:30:47 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <ctype.h>
+#include <stdio.h>
 
 int	ft_isalpha(int c)
 {
@@ -19,9 +22,7 @@ int	ft_isalpha(int c)
 	return (0);
 }
 
-#include <ctype.h>
-#include <stdio.h>
-
+/*
 int	main(void)
 {
 	int	c;
@@ -31,6 +32,4 @@ int	main(void)
 	printf("%d", ft_isalpha(c));
 	return (0);
 }
-
-/* Devuelve "verdadero" (un valor distinto de cero) si el carácter está entre A y Z o entre a y z. 
-Devuelve 0 en caso contrario */
+*/

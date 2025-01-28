@@ -6,9 +6,12 @@
 /*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 17:24:02 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/16 17:35:28 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:28:51 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <ctype.h>
+#include <stdio.h>
 
 int	ft_isalnum(int c)
 {
@@ -19,9 +22,7 @@ int	ft_isalnum(int c)
 	return (0);
 }
 
-#include <ctype.h>
-#include <stdio.h>
-
+/*
 int	main(void)
 {
 	int	c;
@@ -31,6 +32,4 @@ int	main(void)
 	printf("%d\n", ft_isalnum(c));
 	return (0);
 }
-
-/* Devuelve un valor distinto de cero (verdadero) si el carácter es alfanumérico,
- o 0 (falso) si no lo es */
+*/

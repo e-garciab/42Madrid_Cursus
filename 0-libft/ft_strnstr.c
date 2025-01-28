@@ -6,21 +6,12 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 09:54:35 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/24 11:45:38 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/28 19:20:08 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <bsd/string.h>
 #include <stdio.h>
-
-// locates the first occurrence of the null-terminated string little in the 
-// string big, where not more than len characters
-// are searched. Only the first len characters are searched.
-// Return value:
-// If little is an empty string, big is returned;
-// if little occurs nowhere in big, NULL is returned;
-// otherwise a pointer to the first character of the first occurrence of little 
-// is returned.
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
@@ -49,16 +40,16 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	return (NULL);
 }
 
-
+/*
 int	main(void)
 {
-	const char *big = "FoBBo Bar Baz";
-	const char *little = "Bo";
-	char *ptr;
+	const char	*big = "lorem ipsum dolor sit amet";
+	const char	*little = "dolor";
+	char		*ptr;
 
-	ptr = strnstr(big, little, 12);
-
-	printf("%s\n", ptr);
-	printf("%s\n", ft_strnstr(big, little, 12));
+	ptr = strnstr(big, little, 15);
+	printf ("%s\n", ptr);
+	printf ("%s\n", ft_strnstr(big, little, 15));
 	return (0);
 }
+*/
