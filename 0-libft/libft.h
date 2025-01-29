@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:40:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 18:54:40 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:26:25 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LIBFT_H
 
 # include <stdio.h>
+# include <bsd/string.h>
+# include <string.h>
+# include <stdlib.h>
 
 int		ft_isalpha(int c); /*OK*/
 int		ft_isdigit(int c); /*OK*/
@@ -37,6 +40,6 @@ valor de retorno no igual a funcion original*/
 void	*ft_memchr(const void *s, int c, size_t n); /*OK*/
 int		ft_memcmp(const void *s1, const void *s2, size_t n); /*OK*/
 char	*ft_strnstr(const char *big, const char *little, size_t len); /*OK*/
-int		ft_atoi(const char *nptr);
+// int		ft_atoi(const char *nptr);
 
 #endif /*LIBFT_H*/

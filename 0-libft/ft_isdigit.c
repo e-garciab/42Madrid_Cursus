@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 16:57:33 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 17:33:28 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:52:41 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_isdigit(int c)
 {

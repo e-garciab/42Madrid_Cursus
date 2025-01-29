@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egarcia2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 11:45:07 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 17:31:45 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:52:39 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ctype.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

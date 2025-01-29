@@ -6,12 +6,11 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:03:05 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 13:49:00 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:53:02 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

@@ -6,12 +6,11 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:16:50 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 13:02:26 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:52:53 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
@@ -22,7 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (str[i] == c)
+		if (str[i] == (unsigned char) c)
 			return ((void *)&str[i]);
 		else
 			i++;
@@ -33,9 +32,9 @@ void	*ft_memchr(const void *s, int c, size_t n)
 /*
 int	main(void)
 {
-	const char	str[20] = "hola mundo";
-	int			c = 'l';
-	size_t		n = 4;
+	int	str[20] = {-49, 49, 1, -1, 0, -2, 2};
+	int			c = -1;
+	size_t		n = 47;
 	char		*result = ft_memchr (str, c, n);
 
 	printf ("%s\n", result);

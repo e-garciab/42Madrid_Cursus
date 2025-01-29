@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:05:30 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/28 18:39:54 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:53:36 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -21,7 +20,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	while (i < n && ((s1[i] != '\0') || (s2[i] != '\0')))
 	{
 		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
 	return (0);
@@ -30,11 +29,11 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 /*
 int	main(void)
 {
-	const char	s1[] = "holacaracola";
-	const char	s2[] = "hola";
+	const char	s1[] = "test\200";
+	const char	s2[] = "test\0";
 
-	printf("%d\n", strncmp(s1, s2, 20));
-	printf("%d", ft_strncmp(s1, s2, 20));
+	printf("%d\n", strncmp(s1, s2, 6));
+	printf("%d", ft_strncmp(s1, s2, 6));
 	return (0);
 }
 */

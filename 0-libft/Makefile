@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 15:32:55 by egarcia2          #+#    #+#              #
-#    Updated: 2025/01/28 18:16:16 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/01/29 14:26:38 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCS = ft_isalpha.c \
 	ft_memchr.c \
 	ft_memcmp.c \
 	ft_strnstr.c \
-	ft_atoi.c
+#	ft_atoi.c
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)

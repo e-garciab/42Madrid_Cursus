@@ -6,11 +6,10 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:10:13 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/28 18:36:29 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:53:29 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
