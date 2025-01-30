@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:31:07 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/29 16:02:56 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:51:04 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	s = (const unsigned char *)src;
 	if (s < d)
 	{
-		while (n > 0)
-		{
-			n--;
+		while (n-- > 0)
 			d[n] = s[n];
-		}
 	}
 	else
 	{

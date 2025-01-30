@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 12:35:21 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/30 13:56:52 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/30 12:51:33 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/30 20:23:16 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
-		i++;
-	while (i > 0)
 	{
-		if (s[i] == (unsigned char) c)
-			return ((char *)&s[i]);
-		i--;
+		write(fd, &s[i], 1);
+		i++;
 	}
-	if (s[i] == (unsigned char) c)
-		return ((char *)&s[i]);
-	return (NULL);
 }
 /*
 int	main(void)
 {
-	const char	s[] = "bonjour";
+	char	*str;
 
-	printf ("%s\n", strrchr(s, '\0'));
-	printf ("%s\n", ft_strrchr(s, '\0'));
+	str = "Hola mundo";
+	ft_putstr_fd(str, 1);
 	return (0);
 }
 */

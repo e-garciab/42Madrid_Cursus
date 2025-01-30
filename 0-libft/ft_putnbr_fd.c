@@ -1,41 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 12:35:21 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/30 13:56:52 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/01/30 13:50:39 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/01/30 20:23:14 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t	i;
+	char	sign;
+	char	c;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	while (i > 0)
+	if (n == -2147483648)
+		write(fd, "-2147483648", 11);
+	else if (n < 0)
 	{
-		if (s[i] == (unsigned char) c)
-			return ((char *)&s[i]);
-		i--;
+		sign = '-';
+		write(fd, &sign, 1);
+		n = -n;
 	}
-	if (s[i] == (unsigned char) c)
-		return ((char *)&s[i]);
-	return (NULL);
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	if (n >= 0 && n <= 9)
+	{
+		c = n + '0';
+		write(fd, &c, 1);
+	}
 }
 /*
 int	main(void)
 {
-	const char	s[] = "bonjour";
+	int	nb;
 
-	printf ("%s\n", strrchr(s, '\0'));
-	printf ("%s\n", ft_strrchr(s, '\0'));
+	nb = -2147483648;
+	ft_putnbr_fd(nb, 1);
 	return (0);
 }
 */
