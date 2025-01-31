@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 11:20:54 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/29 14:19:34 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:59:04 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	ft_strlen(const char *s)
 /*
 int	main(void)
 {
-	const char	s[] = "test\0";
+	const char	s[] = "hola";
 
 	printf("%lu\n", strlen(s));
 	printf("%lu", ft_strlen(s));

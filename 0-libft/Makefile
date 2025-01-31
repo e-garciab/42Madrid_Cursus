@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 15:32:55 by egarcia2          #+#    #+#              #
-#    Updated: 2025/01/30 20:23:23 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/01/31 14:22:30 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,11 @@ SRCS = ft_isalpha.c \
 	ft_memcmp.c \
 	ft_strnstr.c \
 	ft_atoi.c \
+	ft_calloc.c \
 	ft_strdup.c \
 	ft_substr.c \
 	ft_strjoin.c \
+	ft_strtrim.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
@@ -74,8 +76,7 @@ re: fclean all
 .PHONY: all clean fclean re
 
 
-#	ft_calloc.c \
-	ft_strtrim \
+#	
 	ft_split \
 	ft_itoa \
 	ft_strmapi \

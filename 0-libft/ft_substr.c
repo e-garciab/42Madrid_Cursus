@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:01:16 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/30 20:23:20 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:25:06 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,23 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*str;
-	size_t	i;
 	size_t	j;
 
-	i = start;
-	j = 0;
-	str = malloc((len + 1) * sizeof(char));
+	if (s == NULL || start >= ft_strlen(s) || len <= 0)
+		return (ft_calloc(1, sizeof(char)));
+	if (len >= ft_strlen(s))
+		len = ft_strlen(s) - start;
+	if ((start + len) > ft_strlen(s))
+		str = malloc((len) * sizeof(char));
+	else
+		str = malloc((len + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
-	while (s[i] != '\0' && i < ft_strlen(s) && j < len)
+	j = 0;
+	while (s[start] != '\0' && j < len)
 	{
-		str[j] = s[i];
-		i++;
+		str[j] = s[start];
+		start++;
 		j++;
 	}
 	str[j] = '\0';
@@ -36,13 +41,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 int	main(void)
 {
 	char const s[] = "hola";
-	unsigned int start = 4294967295;
-	size_t len = 0;                
+	unsigned int start = 3;
+	size_t len = 2;                
 	printf("%s\n", ft_substr(s, start, len));
 	return (0);
 }
 */
-
-//s: La string desde la que crear la substring.
-//start: el índice del caracter en ’s’ desde el que empezar la substring
-//len:  La longitud máxima de la substring.
