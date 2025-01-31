@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 15:32:55 by egarcia2          #+#    #+#              #
-#    Updated: 2025/01/31 14:22:30 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/01/31 19:34:51 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,8 @@ SRCS = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c \
+	ft_striteri.c
 
 
 #Archivos objeto
@@ -76,8 +77,7 @@ re: fclean all
 .PHONY: all clean fclean re
 
 
-#	
-	ft_split \
+#		ft_split \
 	ft_itoa \
 	ft_strmapi \
-	ft_striteri
+	
