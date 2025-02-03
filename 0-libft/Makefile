@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 15:32:55 by egarcia2          #+#    #+#              #
-#    Updated: 2025/01/31 19:34:51 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/02/03 18:45:00 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,11 +43,14 @@ SRCS = ft_isalpha.c \
 	ft_substr.c \
 	ft_strjoin.c \
 	ft_strtrim.c \
+	ft_itoa.c \
+	ft_strmapi.c \
+	ft_striteri.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c \
-	ft_striteri.c
+	ft_putnbr_fd.c
+	
 
 
 #Archivos objeto
@@ -76,8 +79,4 @@ re: fclean all
 #Phony targets (especifica quee all y clean no son archivos sino nombres de reglas)
 .PHONY: all clean fclean re
 
-
 #		ft_split \
-	ft_itoa \
-	ft_strmapi \
-	
