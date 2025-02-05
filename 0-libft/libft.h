@@ -6,19 +6,19 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:40:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/03 18:59:00 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:45:53 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <bsd/string.h>
 # include <ctype.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <bsd/string.h>
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
