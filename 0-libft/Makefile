@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 15:32:55 by egarcia2          #+#    #+#              #
-#    Updated: 2025/02/03 18:59:01 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/02/07 16:25:49 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,23 +51,35 @@ SRCS = ft_isalpha.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c
-	
+
+SRCS_BONUS = ft_lstnew_bonus.c \
+			ft_lstadd_front_bonus.c \
+			ft_lstsize_bonus.c \
+			ft_lstlast_bonus.c \
+			ft_lstadd_back_bonus.c
+
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 #Regla principal
 all: $(NAME)
 
-#Cómo construir el ejecutable
+#Construcción de la librería
 $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
+#Compilación de archivos fuente
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+#Regla para compilar el bonus y agegarlo a la librería
+bonus: $(OBJS) $(OBJS_BONUS)
+	ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)
+
 #Limpiar los archivos temporales generados (.o)
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
 	rm -f $(NAME)
