@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 17:18:34 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/31 10:48:09 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:13:07 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strdup(const char *s)
 /*
 int	main(void)
 {
-	const char	s[] = "";
+	const char	s[] = "hola";
 
 	printf("%s\n", strdup(s));
 	printf("%s\n", ft_strdup(s));

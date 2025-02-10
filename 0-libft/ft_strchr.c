@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 18:04:54 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/01/30 13:56:50 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:49:38 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ char	*ft_strchr(const char *s, int c)
 /*
  int	main(void)
  {
-	const char	s[] = "0x555c8d1a7020";
+	const char	s[] = "Hola Mundo";
+	int			c = 'o';
 
-	printf("%p\n", strchr(s, '\0'));
-	printf("%p\n", ft_strchr(s, '\0'));
+	printf("%s\n", strchr(s, c));
+	printf("%s\n", ft_strchr(s, c));
 	return (0);
  }
 */

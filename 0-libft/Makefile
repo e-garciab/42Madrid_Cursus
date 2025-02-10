@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 15:32:55 by egarcia2          #+#    #+#              #
-#    Updated: 2025/02/07 16:25:49 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/02/10 17:31:02 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,9 @@ SRCS_BONUS = ft_lstnew_bonus.c \
 			ft_lstlast_bonus.c \
 			ft_lstadd_back_bonus.c \
 			ft_lstdelone_bonus.c \
-			ft_lstclear_bonuc.c
+			ft_lstclear_bonus.c \
+			ft_lstiter_bonus.c \
+			ft_lstmap_bonus.c
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)

@@ -11,13 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-/// @brief Fills the first n bytes of the memory area pointed to by s 
-/// with the constant byte c
-/// @param s pointer address to the memory area to be filled
-/// @param c The value you want to fill the memory area with (converted 
-/// to an unsigned char)
-/// @param n The number of bytes to fill with the specified value.
-/// @return pointer to the memory area that has been filled
+
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t			i;
@@ -27,7 +21,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		ptr[i] = (unsigned char) c;
+		ptr[i] = c;
 		i++;
 	}
 	return (s);

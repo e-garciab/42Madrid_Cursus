@@ -6,12 +6,19 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:55:05 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/05 13:16:08 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:14:08 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/// @brief split a string into an array of words.
+/// Allocate (with malloc(3)) and returns an array of strings obtained 
+/// by splitting s with the character c, used as delimiter.
+/// The returned array must be NUL-terminated.
+/// @param s string to split
+/// @param c delimiter character
+/// @return an array of strings resulting from the splitting of s or 
+/// NULL if the memory allocation failed.
 static size_t	ft_count_words(const char *s, char c)
 {
 	size_t	i;

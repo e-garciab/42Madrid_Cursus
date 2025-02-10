@@ -11,7 +11,10 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-
+/// @brief checks if a character is a letter of the alphabet
+/// @param c the character to evaluate
+/// @return A non-zero value (true) if the character is a letter, 
+/// or 0 (false) if it is not.
 int	ft_isalpha(int c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))

@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 16:44:43 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/29 16:01:29 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/10 10:41:43 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,12 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 /*
 int	main(void)
 {
-	char	*a = NULL;
-	char	*b = NULL;
-
-	ft_memcpy(a, b, 3);
-	// char	src[20] = "hola mundo";
-	// char	dest[20];
-	// size_t	n = 6;
-
-	// ft_memcpy (dest, src, n);
-	// printf("%s\n", dest);
+	char	src[10] = "Hola";
+	char	dest[10] = "";
+	char	*result; 
+	
+	result = ft_memcpy (dest, src, 2);
+	printf("%s\n", result);
 	return (0);
 }
 */

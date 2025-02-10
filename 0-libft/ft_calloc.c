@@ -25,10 +25,20 @@ void	*ft_calloc(size_t nmemb, size_t size)
 /*
 int	main(void)
 {
-	int *arr1 = calloc(10, sizeof(int));
-	printf("%d\n", *arr1);
-	int *arr2 = ft_calloc(10, sizeof(int));
-	printf("%d\n", *arr2);
+	size_t	num_elements = 5;
+	size_t	size_of_element = sizeof(int);
+	size_t	i;
+	
+	int *arr1 = calloc(num_elements, size_of_element);
+	printf("Memory allocated\n");
+	if(arr1 == NULL)
+		printf("Memory allocation failed");
+	i = 0;
+	while (i < num_elements)
+	{
+		printf("%d\n", arr1[i]);
+		i++;
+	}
 	return (0);
 }
 */
