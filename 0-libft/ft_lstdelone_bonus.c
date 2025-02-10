@@ -19,6 +19,26 @@
 /// @return none 
 void ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-
-
+    if (!lst)
+        return;
+    del (lst->content); 
+    free (lst);
 }
+
+
+void del(void *content)
+{
+    free(content);
+}
+
+int main(void)
+{
+    t_list *node;
+
+    node = ft_lstnew("Nodo Nuevo");
+    printf("Nodo creado: %s\n", (char *)node->content);
+    ft_lstdelone(node, del);
+    printf("Nodo eliminado: %s\n",(char *)node->content);
+    return (0);
+}
+

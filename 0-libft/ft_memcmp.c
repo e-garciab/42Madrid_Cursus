@@ -38,7 +38,7 @@ int	main(void)
 	size_t		n = 5;
 	int			result = ft_memcmp (str1, str2, n);
 
-	printf ("%d\n", result);anch is up to date with 'origin/mas
+	printf ("%d\n", result);
 	return (0);
 }
 */
