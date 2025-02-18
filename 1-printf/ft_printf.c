@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:15:28 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/17 14:56:36 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:35:57 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,124 +14,55 @@
 #include <stdarg.h>
 #include <unistd.h>
 
+static int	ft_see_format(char const *str, va_list args, int *i)
+{
+	int	count;
 
-
-
-// int	print_ptr()
-// int	print_decimal()
-// int	print_int()
-// int	print_unsigned_decimal()
-// int	print_hex_lower()
-// int	print_hex_upper()
-
-
+	count = 0;
+	if (str[*i] == '%')
+		count = ft_print_char('%');
+	if (str[*i] == 'c')
+		count = ft_print_char(va_arg(args, int));
+	if (str[*i] == 's')
+		count = ft_print_str(va_arg(args, char *));
+	if (str[*i] == 'd')
+		count = ft_print_nbr(va_arg(args, int));
+	if (str[*i] == 'i')
+		count = ft_print_nbr(va_arg(args, int));
+	if (str[*i] == 'u')
+		count = ft_print_unsigned_nbr(va_arg(args, unsigned int));
+	if (str[*i] == 'x')
+		count = ft_print_hex(va_arg(args, int), 1);
+	if (str[*i] == 'X')
+		count = ft_print_hex(va_arg(args, int), 0);
+	if (str[*i] == 'p')
+		count = ft_print_ptr(va_arg(args, void *));
+	return (count);
+}
 
 int	ft_printf(char const *str, ...)
 {
-	va_list args; //Declara una lista de argumentos variables.
-	int	i;
-	int	count;
-	
+	va_list	args;
+	int		i;
+	int		count;
+
 	i = 0;
 	count = 0;
-	va_start(args, str); //inicia la lista de argumentos, tomando str como el último argumento fijo. 
-						 // Después de esto, args nos permitirá acceder a los argumentos adicionales.
+	va_start(args, str);
 	while (str[i] != '\0')
-	{	
+	{
 		if (str[i] == '%')
-		{	
-			if ((str[i + 1]) == '%')
-			{	
-				count += ft_print_char('%');
-				i++;
-			}			
-			if ((str[i + 1]) == 'c')
-			{	
-				count += ft_print_char(va_arg(args, int));
-				i++;
-			}
-			if ((str[i + 1]) == 's')
-			{	
-				count += ft_print_str(va_arg(args, char *));
-				i++;
-			}
-			if ((str[i + 1]) == 'd')
-			{	
-				count += ft_print_nbr(va_arg(args, int));
-				i++;
-			}
-			if ((str[i + 1]) == 'i')
-			{	
-				count += ft_print_nbr(va_arg(args, int));
-				i++;
-			}
-			if ((str[i + 1]) == 'u')
-			{	
-				count += ft_print_nbr(va_arg(args, unsigned int));
-				i++;
-			}
+		{
+			i++;
+			count += ft_see_format(str, args, &i);
 		}
 		else
-		{	
-			write (1, &str[i], 1);
+		{
+			write(1, &str[i], 1);
 			count++;
 		}
 		i++;
-	}			
+	}
 	va_end(args);
-	return(count);
-	}
-/*
-int	main(void)
-{
-	//printf("Este es mi primer caracter %c\n", 'a');
-	
-	printf("%d\n",ft_printf("Este es mi primer caracter %c%c%c\n", 'a', 'b', 'c'));
-	return (0);
+	return (count);
 }
-
-*/
-
-/*
-int	sumatorio (int n, ...)
-{
-	va_list	vargs;
-	int	i;
-	int	ac;
-	int	sig;
-
-	i = 0;
-	ac = 0;
-	va_start (vargs, n);
-	while (i < n)
-	{	
-		sig = va_arg(vargs, int);
-		i++;
-		ac += sig;
-	}
-	va_end(vargs);
-return (ac);	
-}
-
-int	main()
-{
-	int total = sumatorio (3, 1, 2, 3);
-	printf("Total: %d\n", total);
-	return (0);
-}
-
-			if ((str[i] + 1) == 'c')
-				ft_putchar_fd ((va_arg(args, char)), 1);
-				// contar longitud de lo que ha escrito
-				i++;	
-		}
-			else if ((str[i] + 1) == 's')
-				ft_putstr_fd((va_arg(args, char*)), 1);
-				
-				i++;
-			else if ((str[i] + 1) == 'i')
-				c = va_arg(args, int);
-				ft_putnbr_fd();
-				i++;
-
-*/
