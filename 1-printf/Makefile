@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:12:02 by egarcia2          #+#    #+#              #
-#    Updated: 2025/02/18 15:03:06 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/02/18 15:34:08 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = ft_printf.c \
 	ft_print_unsigned_nbr.c \
 	ft_print_hex.c \
 	ft_print_ptr.c \
-	ft_main_printf.c
+	main_printf.c
 
 LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a

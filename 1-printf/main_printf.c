@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 11:12:24 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/18 15:02:46 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:33:25 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	char			c;
 	char			*str;
+	char			*vacio;
 	char			z;
 	int				n1;
 	int				n2;
@@ -38,6 +39,11 @@ int	main(void)
 	str = "hola mundo";
 	printf("%d\n", printf("Result: %s\n", str));
 	ft_printf("%d\n", ft_printf("Result: %s\n", str));
+	vacio = NULL;
+	printf("%d\n", printf("Result: %s\n", vacio));
+	ft_printf("%d\n", ft_printf("Result: %s\n", vacio));
+	printf("%d\n", printf("Result: %p\n", vacio));
+	ft_printf("%d\n", ft_printf("Result: %p\n", vacio));
 	z = 'b';
 	printf("%d\n", printf("Result: %c %c %s\n", c, z, str));
 	ft_printf("%d\n", ft_printf("Result: %c %c %s\n", c, z, str));
@@ -56,7 +62,7 @@ int	main(void)
 	uns3 = -2147483648;
 	printf("%d\n", printf("Result: %u %u %u\n", uns1, uns2, uns3));
 	ft_printf("%d\n", ft_printf("Result: %u %u %u\n", uns1, uns2, uns3));
-	n = 0;
+	n = -1;
 	printf("%d\n", printf("Result: %x %X\n", n, n));
 	ft_printf("%d\n", ft_printf("Result: %x %X\n", n, n));
 	str1 = "hola";

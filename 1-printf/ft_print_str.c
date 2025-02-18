@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:04:01 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/18 14:00:11 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:33:23 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	ft_print_str(char *s)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (s[i] != '\0')
 	{
 		write(1, &s[i], 1);
