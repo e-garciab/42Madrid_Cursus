@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:15:28 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/18 14:35:57 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:20:09 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,31 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-static int	ft_see_format(char const *str, va_list args, int *i)
+static int	ft_see_format(va_list args, char c, int count)
 {
-	int	count;
-
-	count = 0;
-	if (str[*i] == '%')
+	if (c == '%')
 		count = ft_print_char('%');
-	if (str[*i] == 'c')
+	else if (c == 'c')
 		count = ft_print_char(va_arg(args, int));
-	if (str[*i] == 's')
+	else if (c == 's')
 		count = ft_print_str(va_arg(args, char *));
-	if (str[*i] == 'd')
+	else if (c == 'd')
 		count = ft_print_nbr(va_arg(args, int));
-	if (str[*i] == 'i')
+	else if (c == 'i')
 		count = ft_print_nbr(va_arg(args, int));
-	if (str[*i] == 'u')
+	else if (c == 'u')
 		count = ft_print_unsigned_nbr(va_arg(args, unsigned int));
-	if (str[*i] == 'x')
-		count = ft_print_hex(va_arg(args, int), 1);
-	if (str[*i] == 'X')
-		count = ft_print_hex(va_arg(args, int), 0);
-	if (str[*i] == 'p')
+	else if (c == 'x')
+		count = ft_print_hex(va_arg(args, unsigned int), c);
+	else if (c == 'X')
+		count = ft_print_hex(va_arg(args, unsigned int), c);
+	else if (c == 'p')
 		count = ft_print_ptr(va_arg(args, void *));
+	else
+	{
+		count += ft_print_char('%');
+		count += ft_print_char(c);
+	}
 	return (count);
 }
 
@@ -49,20 +51,22 @@ int	ft_printf(char const *str, ...)
 	i = 0;
 	count = 0;
 	va_start(args, str);
+	if (!str)
+		return (-1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
 		{
+			if ((str[i + 1] == '\0') && (i == 0))
+				return (-1);
+			else if (str[i + 1] == '\0')
+				return (-1);
 			i++;
-			count += ft_see_format(str, args, &i);
+			count += ft_see_format(args, str[i], count);
 		}
 		else
-		{
-			write(1, &str[i], 1);
-			count++;
-		}
+			count += write(1, &str[i], 1);
 		i++;
 	}
-	va_end(args);
-	return (count);
+	return (va_end(args), count);
 }

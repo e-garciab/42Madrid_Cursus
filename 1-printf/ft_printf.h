@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:09:48 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/18 14:00:37 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:53:02 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_print_char(char c);
 int	ft_print_str(char *s);
 int	ft_print_nbr(int n);
 int	ft_print_unsigned_nbr(unsigned int n);
-int	ft_print_hex(unsigned long long n, int flag);
+int	ft_print_hex(unsigned long n, char flag);
 int	ft_print_ptr(void *ptr);
 
 #endif /*FT_PRINTF_H*/
