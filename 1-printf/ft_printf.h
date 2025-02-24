@@ -6,20 +6,16 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:09:48 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/21 12:53:02 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:09:57 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
-# include <bsd/string.h>
-# include <ctype.h>
 # include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 int	ft_printf(char const *str, ...);
 int	ft_print_char(char c);

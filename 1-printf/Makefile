@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/13 13:12:02 by egarcia2          #+#    #+#              #
-#    Updated: 2025/02/21 15:21:41 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/02/24 11:09:54 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,11 @@ SRCS = ft_printf.c \
 	ft_print_hex.c \
 	ft_print_ptr.c
 
-LIBFT_DIR = ./libft
-LIBFT = $(LIBFT_DIR)/libft.a
-INCLUDES = -I $(LIBFT_DIR)
-
 #Object files
 OBJS = $(SRCS:.c=.o)
 
 #Principal rule
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
 #Library's construction
 $(NAME): $(OBJS)
@@ -44,10 +40,7 @@ $(NAME): $(OBJS)
 
 #Source files compilation
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(LIBFT):
-	make -C $(LIBFT_DIR) all clean
+	$(CC) $(CFLAGS) -c $< -o $@
 
 #Rule that cleans the temporary files (.o)
 clean:
@@ -55,7 +48,7 @@ clean:
 	
 #Rule that cleans .a
 fclean: clean
-	rm -f $(NAME) $(LIBFT)
+	rm -f $(NAME)
 
 #Rule that cleans and compiles all again
 re: fclean all

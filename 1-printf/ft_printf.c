@@ -6,15 +6,13 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:15:28 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/21 15:20:09 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:51:01 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <unistd.h>
 
-static int	ft_see_format(va_list args, char c, int count)
+static int	ft_read_conversion(va_list args, char c, int count)
 {
 	if (c == '%')
 		count = ft_print_char('%');
@@ -36,7 +34,7 @@ static int	ft_see_format(va_list args, char c, int count)
 		count = ft_print_ptr(va_arg(args, void *));
 	else
 	{
-		count += ft_print_char('%');
+		count = ft_print_char('%');
 		count += ft_print_char(c);
 	}
 	return (count);
@@ -57,16 +55,15 @@ int	ft_printf(char const *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			if ((str[i + 1] == '\0') && (i == 0))
-				return (-1);
-			else if (str[i + 1] == '\0')
+			if (str[i + 1] == '\0')
 				return (-1);
 			i++;
-			count += ft_see_format(args, str[i], count);
+			count += ft_read_conversion(args, str[i], count);
 		}
 		else
 			count += write(1, &str[i], 1);
 		i++;
 	}
-	return (va_end(args), count);
+	va_end(args);
+	return (count);
 }

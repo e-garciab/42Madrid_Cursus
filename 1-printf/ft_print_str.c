@@ -6,25 +6,25 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 12:04:01 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/18 15:33:23 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:14:25 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_str(char *s)
+int	ft_print_str(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (s == NULL)
+	if (str == NULL)
 	{
 		write(1, "(null)", 6);
 		return (6);
 	}
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 	{
-		write(1, &s[i], 1);
+		write(1, &str[i], 1);
 		i++;
 	}
 	return (i);
