@@ -17,14 +17,17 @@ int	main(void)
 	int	fd;
 	char *str;
 
-	fd = open("/home/egarcia2/Desktop/test.txt", O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	str = get_next_line(fd);
-	while (str)
-	{	
-		printf("%s", str);
-		free(str);
-		str = get_next_line(fd);
-	}
 	close(fd);
 	return(0);
 }
+
+/*
+while (str)
+{	
+	printf("%s", str);
+	free(str);
+	str = get_next_line(fd);
+}
+	*/

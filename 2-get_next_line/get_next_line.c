@@ -12,7 +12,47 @@
 
 #include "get_next_line.h"
 
+char *get_next_line(int fd)
+{
+	char	*buffer;
+	static char	*stored;
+	char	*line;
+	char	*temp; // ¿¿¿¿????
+	int len; 
+	ssize_t	bytes_read;
 
+	len = 0;
+
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+		if (!buffer)
+			return(NULL);
+
+	bytes_read = 1; //inicializo en 1 ya que, todavía no he leído y quiero que entre en este bucle. 		
+	while ((ft_strchr(stored, '\n') == NULL) && bytes_read > 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read == -1)
+			free(buffer);
+			return(NULL);
+		buffer[bytes_read] = '\0';
+
+		temp = stored;
+		stored = ft_strjoin(temp, buffer);
+		free(temp);
+	}
+
+	while (stored[len] != '\0' && stored[len] != '\n')
+		len++;
+
+	line = ft_substr(stored, 0, (len + 1));
+	temp = stored;
+	stored = ft_strchr(temp, '\n');
+	free(temp);
+	return (line);
+}
+
+
+/*
 char *get_next_line(int fd)
 {
 	char a;
@@ -139,4 +179,3 @@ char *get_next_line(int fd)
 // 	//printf("bytes_leidos: %zd\n", result);
 // }
 // */
-
