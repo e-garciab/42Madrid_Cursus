@@ -15,167 +15,76 @@
 char *get_next_line(int fd)
 {
 	char	*buffer;
-	static char	*stored;
+	static char *stored;
+	size_t	bytes_read;
+	char	*temp;
+	int 	len;
 	char	*line;
-	char	*temp; // ¿¿¿¿????
-	int len; 
-	ssize_t	bytes_read;
-
-	len = 0;
 
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		if (!buffer)
 			return(NULL);
-
-	bytes_read = 1; //inicializo en 1 ya que, todavía no he leído y quiero que entre en este bucle. 		
-	while ((ft_strchr(stored, '\n') == NULL) && bytes_read > 0)
+	memset(buffer, 0, (BUFFER_SIZE + 1));
+	
+	bytes_read = 1;
+	while(bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
+		{	
+			printf("Error reading the file");
 			free(buffer);
 			return(NULL);
-		buffer[bytes_read] = '\0';
-
-		temp = stored;
-		stored = ft_strjoin(temp, buffer);
-		free(temp);
+		}
+		else if (bytes_read == 0)
+		{	
+			buffer[0] = '\0';
+			printf("Nothing to read\n");
+            break ;
+			// printf("contenido buffer %s\n", buffer);
+			// free(buffer);
+			// return(NULL);
+		}
+		else
+		{	
+			buffer[bytes_read] = '\0';
+			printf("bytes_leidos: %d\n", bytes_read);
+			printf("contenido buffer: %s\n", buffer);
+		}
+		if(!stored)
+		{	
+			stored = ft_strdup(buffer);
+			printf("contenido stored: %s\n", stored);
+			//printf("direccion de memoria de stored: %p\n", stored);
+		}
+		else
+		{	
+			//printf("direccion de memoria de stored antes de join: %p\n", stored);
+			temp = stored;
+			//printf("direccion de memoria de temp antes de join: %p\n", temp);
+			stored = ft_strjoin(temp, buffer);
+			free(temp);
+			printf("contenido stored: %s\n", stored);
+			//printf("direccion de memoria de stored despues de join: %p\n", stored);
+		}
+		if (ft_strchr(stored, '\n'))
+			break ;
 	}
 
+	free(buffer);
+    if (!stored || stored[0] == '\0')
+        return (NULL);
+
+	len = 0;
 	while (stored[len] != '\0' && stored[len] != '\n')
-		len++;
+		len++; 
 
 	line = ft_substr(stored, 0, (len + 1));
-	temp = stored;
-	stored = ft_strchr(temp, '\n');
+    temp = stored;
+    stored = ft_substr(stored, (len + 1), (ft_strlen(stored) - len));
 	free(temp);
-	return (line);
+	
+	printf("contenido stored: %s\n", stored);
+	printf("contenido line: %s\n", line);
+	return(line);
 }
-
-
-/*
-char *get_next_line(int fd)
-{
-	char a;
-	ssize_t result;
-	char *str;
-	int i;
-	
-	i = 0;
-	str = malloc(BUFFER_SIZE * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	result = read(fd, &a, 1);
-	while (result > 0)
-	{	
-		if (a == '\n')
-		{	
-			str[i] = a;
-			i++;
-			break;
-		}
-		str[i] = a;
-		i++;
-		result = read(fd, &a, 1);
-	}
-	str[i] = '\0';
-	if(result == 0)
-	{
-		free(str);
-		return (NULL);		
-	}
-	return(str);
-}
-
-/*
-static size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-static char	*ft_strdup(const char *s)
-{
-	size_t	i;
-	size_t	len;
-	char	*str;
-
-	i = 0;
-	len = ft_strlen(s);
-	str = malloc((len + 1) * sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	while (s[i] != '\0')
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char *get_next_line(int fd)
-{
-	char	*buffer;
-	char	*str;
-	ssize_t	result;
-	int		i;
-	
-	buffer = malloc(BUFFER_SIZE * sizeof(char));
-		if (buffer == NULL)
-		return (NULL);
-	result = read(fd, buffer, BUFFER_SIZE);
-	printf("buff_leido: %s\n", buffer);
-	printf("bytes_leidos: %zd\n", result);
-	if (result == -1)
-		return (NULL);
-	if (result == 0)
-		return (NULL);
-	if (result > 0)
-	{
-		if (!str)
-		str = strdup(buffer);
-
-		
-		while(buffer[i] != '\0')
-		{
-			str = ft_strdup(buffer);
-			
-			printf("str_leido: %s\n", str);
-			if
-		}
-
-	}
-	return(0);
-
-	
-}
-
-
-
-
-// 	// printf("buff_leido: %s\n", buffer);
-
-// 	i = 0;
-	
-// 	{
-// 		if(buffer[i] != '\n') 
-	
-// 		result = read(fd, &buffer[i], 1);
-// 		if (result == -1)
-// 			return (NULL);
-// 		str[i] = strdup(&buffer[i]);
-// 		free(buffer);
-// 		i++;
-// 	}
-// 		printf("str_leido: %s\n", str);
-
-// 	return (str);
-
-	
-// 	//printf("bytes_leidos: %zd\n", result);
-// }
-// */
