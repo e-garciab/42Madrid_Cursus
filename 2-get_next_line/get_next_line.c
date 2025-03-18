@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:00:21 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/03/05 19:42:00 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:08:16 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ char *get_next_line(int fd)
 {
 	char	*buffer;
 	static char *stored;
-	size_t	bytes_read;
+	int	bytes_read;
 	char	*temp;
 	int 	len;
 	char	*line;
 
+	len = 0;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 		if (!buffer)
 			return(NULL);
@@ -73,13 +74,14 @@ char *get_next_line(int fd)
 
 	free(buffer);
     if (!stored || stored[0] == '\0')
-        return (NULL);
-
-	len = 0;
+    {
+	    return (NULL);
+	}
 	while (stored[len] != '\0' && stored[len] != '\n')
+	{
 		len++; 
-
-	line = ft_substr(stored, 0, (len + 1));
+	}
+	line = ft_substr(stored, 0, (len));
     temp = stored;
     stored = ft_substr(stored, (len + 1), (ft_strlen(stored) - len));
 	free(temp);
