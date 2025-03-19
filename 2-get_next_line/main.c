@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:17:02 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/03/05 19:41:37 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:02:42 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ int	main(void)
 
 	fd = open("./txt/test.txt", O_RDONLY);
 	// fd = 0;
-	str = get_next_line(fd);
-	while (str)
+	str = "";
+	while (str != NULL)
 	{	
+		str = get_next_line(fd);
 		printf("Resultado gnl: %s\n", str);
 		free(str);
-		str = get_next_line(fd);
+
 	}
 	// printf("Resultado gnl llamada 1: %s\n", str);
 	// str = get_next_line(fd);

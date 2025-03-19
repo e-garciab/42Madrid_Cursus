@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/18 15:08:13 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/03/19 17:10:23 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ static char	*ft_read_line(int fd, char *buffer, char *stored)
 		buffer[bytes_read] = '\0';
 		if (!stored)
 			stored = ft_strdup(buffer);
-		temp = stored;
-		stored = ft_strjoin(temp, buffer);
-		free(temp);
+		else
+		{
+			temp = stored;
+			stored = ft_strjoin(temp, buffer);
+			free(temp);
+		}
 		if (ft_strchr(stored, '\n'))
 			break ;
 	}
@@ -65,11 +68,12 @@ char	*get_next_line(int fd)
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	memset(buffer, 0, (BUFFER_SIZE + 1));
+	//memset(buffer, 0, (BUFFER_SIZE + 1));
 	stored = ft_read_line(fd, buffer, stored);
 	free(buffer);
 	if (!stored || stored[0] == '\0')
 		return (NULL);
 	line  = ft_return_line(stored, line);
+	free(stored);
 	return (line);
 }
