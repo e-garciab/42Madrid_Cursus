@@ -5,88 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 15:00:21 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/03/19 15:02:45 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
+/*   Updated: 2025/03/25 14:03:07 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+static char	*ft_strchr(const char *s, int c)
 {
-	char	*buffer;
-	static char *stored;
-	int	bytes_read;
-	char	*temp;
-	int 	len;
-	char	*line;
+	size_t	i;
 
-	len = 0;
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (!buffer)
-			return(NULL);
-	memset(buffer, 0, (BUFFER_SIZE + 1));
-	
+	if (!s)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (unsigned char)c)
+			return ((char *)&s[i]);
+		else
+			i++;
+	}
+	if (s[i] == (unsigned char)c)
+		return ((char *)&s[i]);
+	return (NULL);
+}
+
+static char	*ft_read_line(int fd, char *buffer, char *stored)
+{
+	int		bytes_read;
+	char	*temp;
+
 	bytes_read = 1;
-	while(bytes_read > 0)
+	while (bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{	
-			printf("Error reading the file");
-			free(buffer);
-			return(NULL);
+		{
+			free(stored);
+			return (NULL);
 		}
 		else if (bytes_read == 0)
-		{	
-			buffer[0] = '\0';
-			printf("Nothing to read\n");
-            break ;
-			// printf("contenido buffer %s\n", buffer);
-			// free(buffer);
-			// return(NULL);
-		}
-		else
-		{	
-			buffer[bytes_read] = '\0';
-			printf("bytes_leidos: %d\n", bytes_read);
-			printf("contenido buffer: %s\n", buffer);
-		}
-		if(!stored)
-		{	
-			stored = ft_strdup(buffer);
-			printf("contenido stored: %s\n", stored);
-			//printf("direccion de memoria de stored: %p\n", stored);
-		}
-		else
-		{	
-			//printf("direccion de memoria de stored antes de join: %p\n", stored);
-			temp = stored;
-			//printf("direccion de memoria de temp antes de join: %p\n", temp);
-			stored = ft_strjoin(temp, buffer);
-			free(temp);
-			printf("contenido stored: %s\n", stored);
-			//printf("direccion de memoria de stored despues de join: %p\n", stored);
-		}
+			break ;
+		buffer[bytes_read] = '\0';
+		if (!stored)
+			stored = ft_strdup("");
+		temp = stored;
+		stored = ft_strjoin(temp, buffer);
+		free(temp);
+		temp = NULL;
 		if (ft_strchr(stored, '\n'))
 			break ;
 	}
+	return (stored);
+}
 
-	free(buffer);
-    if (!stored || stored[0] == '\0')
-    {
-	    return (NULL);
-	}
-	while (stored[len] != '\0' && stored[len] != '\n')
-	{
-		len++; 
-	}
-	line = ft_substr(stored, 0, (len));
-    temp = stored;
-    stored = ft_substr(stored, (len + 1), (ft_strlen(stored) - len));
+static char	*ft_return_line(char **stored)
+{
+	int		len;
+	char	*temp;
+	char	*line;
+
+	len = 0;
+	while ((*stored)[len] != '\0' && (*stored)[len] != '\n')
+		len++;
+	line = ft_substr(*stored, 0, (len));
+	temp = *stored;
+	*stored = ft_substr(*stored, (len + 1), (ft_strlen(*stored) - len));
 	free(temp);
-	
-	printf("contenido stored: %s\n", stored);
-	printf("contenido line: %s\n", line);
-	return(line);
+	temp = NULL;
+	if (!(*stored) || (*stored)[0] == '\0')
+	{
+		free(*stored);
+		*stored = NULL;
+	}
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*buffer;
+	static char	*stored;
+	char		*line;
+
+	if ((fd < 0) || (BUFFER_SIZE < 0))
+		return (NULL);
+	line = NULL;
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	stored = ft_read_line(fd, buffer, stored);
+	free(buffer);
+	buffer = NULL;
+	if (!stored)
+		return (NULL);
+	line = ft_return_line(&stored);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:00:16 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/03/19 15:02:46 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:03:09 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	str[i] = '\0';
 	return (str);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
-	if(!s)
-		return(NULL);
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == (unsigned char)c)
-			return ((char *)&s[i]);
-		else
-			i++;
-	}
-	if (s[i] == (unsigned char)c)
-		return ((char *)&s[i]);
-	return (NULL);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
@@ -116,26 +98,17 @@ char	*ft_strdup(const char *s)
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*ptr;
+	unsigned char	*ptr;
+	size_t			i;
 
+	i = 0;
 	ptr = malloc(nmemb * size);
 	if (ptr == NULL)
 		return (NULL);
-	ft_memset(ptr, 0, nmemb * size);
-	return (ptr);
-}
-
-void	*ft_memset(void *s, int c, size_t n)
-{
-	size_t			i;
-	unsigned char	*ptr;
-
-	ptr = (unsigned char *)s;
-	i = 0;
-	while (i < n)
+	while (i < nmemb)
 	{
-		ptr[i] = c;
+		ptr[i] = 0;
 		i++;
 	}
-	return (s);
+	return ((void *)ptr);
 }
