@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/25 14:03:07 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:31:49 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static char	*ft_return_line(char **stored)
 	len = 0;
 	while ((*stored)[len] != '\0' && (*stored)[len] != '\n')
 		len++;
-	line = ft_substr(*stored, 0, (len));
+	line = ft_substr(*stored, 0, (len + 1));
 	temp = *stored;
 	*stored = ft_substr(*stored, (len + 1), (ft_strlen(*stored) - len));
 	free(temp);
@@ -88,7 +88,7 @@ char	*get_next_line(int fd)
 	static char	*stored;
 	char		*line;
 
-	if ((fd < 0) || (BUFFER_SIZE < 0))
+	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
 	line = NULL;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
