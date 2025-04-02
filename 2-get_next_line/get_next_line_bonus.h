@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:00:43 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/04/01 14:49:46 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:55:46 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif /*BUFFER_SIZE*/
 
 # include <stdio.h> //necesaria para printf (main)

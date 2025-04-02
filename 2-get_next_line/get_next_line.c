@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/01 12:05:47 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:08:02 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ static char	*ft_read_line(int fd, char *buffer, char *stored)
 	char	*temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (bytes_read > 0 && !(ft_strchr(stored, '\n')))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
 			free(stored);
+			stored = NULL;
 			return (NULL);
 		}
 		else if (bytes_read == 0)
@@ -54,8 +55,6 @@ static char	*ft_read_line(int fd, char *buffer, char *stored)
 		stored = ft_strjoin(temp, buffer);
 		free(temp);
 		temp = NULL;
-		if (ft_strchr(stored, '\n'))
-			break ;
 	}
 	return (stored);
 }

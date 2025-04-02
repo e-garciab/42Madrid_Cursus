@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/01 14:50:55 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:43:26 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ static char	*ft_read_line(int fd, char *buffer, char *stored)
 	char	*temp;
 
 	bytes_read = 1;
-	while (bytes_read > 0)
+	while (bytes_read > 0 && !(ft_strchr(stored, '\n')))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 		{
 			free(stored);
+			stored = NULL;
 			return (NULL);
 		}
 		else if (bytes_read == 0)
@@ -54,8 +55,6 @@ static char	*ft_read_line(int fd, char *buffer, char *stored)
 		stored = ft_strjoin(temp, buffer);
 		free(temp);
 		temp = NULL;
-		if (ft_strchr(stored, '\n'))
-			break ;
 	}
 	return (stored);
 }
@@ -85,20 +84,20 @@ static char	*ft_return_line(char **stored)
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*stored;
+	static char	*stored[1024];
 	char		*line;
 
-	if ((fd < 0) || (BUFFER_SIZE < 0))
+	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
 	line = NULL;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	stored = ft_read_line(fd, buffer, stored);
+	stored[fd] = ft_read_line(fd, buffer, stored[fd]);
 	free(buffer);
 	buffer = NULL;
-	if (!stored)
+	if (!stored[fd])
 		return (NULL);
-	line = ft_return_line(&stored);
+	line = ft_return_line(&stored[fd]);
 	return (line);
 }
