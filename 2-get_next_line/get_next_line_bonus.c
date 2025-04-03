@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/02 14:43:26 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:38:41 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*ft_return_line(char **stored)
 char	*get_next_line(int fd)
 {
 	char		*buffer;
-	static char	*stored[1024];
+	static char	*stored[MAX_FD];
 	char		*line;
 
 	if ((fd < 0) || (BUFFER_SIZE <= 0))

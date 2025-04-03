@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:03:17 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/02 14:08:02 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:42:13 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*get_next_line(int fd)
 	static char	*stored;
 	char		*line;
 
-	if ((fd < 0) || (BUFFER_SIZE < 0))
+	if ((fd < 0) || (BUFFER_SIZE <= 0))
 		return (NULL);
 	line = NULL;
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));

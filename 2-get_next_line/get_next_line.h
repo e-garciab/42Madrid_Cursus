@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 15:00:43 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/03/28 14:21:05 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:26:21 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif /*BUFFER_SIZE*/
 
-# include <stdio.h> //necesaria para printf (main)
-# include <unistd.h> //necesaria para read y close
-# include <stdlib.h> //necesaria para malloc y free
-# include <fcntl.h> //necesaria para open
+# include <unistd.h>
+# include <stdlib.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
