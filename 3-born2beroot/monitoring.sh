@@ -1,0 +1,16 @@
+#!/bin/bash
+# ARCH
+arch=$(uname -a)
+# CPU PHYSICAL
+cpuf=$(
+# CPU VIRTUAL
+# RAM
+# DISK SPACE
+# CPU USE PERCENT
+# LAST BOOT
+# LVM USE
+# TCP CONNECTIONS
+# USER LOG
+# NETWORK
+# SUDO
+
