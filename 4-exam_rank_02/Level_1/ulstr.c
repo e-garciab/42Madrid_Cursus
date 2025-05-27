@@ -1,3 +1,4 @@
+/*
 Assignment name  : ulstr
 Expected files   : ulstr.c
 Allowed functions: write
@@ -20,3 +21,26 @@ $>./ulstr "3:21 Ba  tOut  moUn ki Ka di KE m'en Ka fe fot" | cat -e
 3:21 bA  ToUT  MOuN KI kA DI ke M'EN kA FE FOT$
 $>./ulstr | cat -e
 $
+*/
+
+#include <unistd.h>
+
+int main(int argc, char *argv[])
+{
+    int i;
+    i=0;
+    if(argc==2)
+    {
+        while(argv[1][i])
+        {
+            if(argv[1][i] >= 65 && argv[1][i] <= 90)
+                argv[1][i] += 32;
+            else if(argv[1][i] >= 97 && argv[1][i] <= 122)
+                argv[1][i] -= 32;
+            write(1,&argv[1][i],1);
+            i++;
+        }
+    }
+    write(1,"\n",1);
+    return(0);
+}

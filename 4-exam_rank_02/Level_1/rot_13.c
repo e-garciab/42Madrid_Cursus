@@ -1,3 +1,4 @@
+/*
 Assignment name  : rot_13
 Expected files   : rot_13.c
 Allowed functions: write
@@ -26,3 +27,33 @@ $>
 $>./rot_13 "" | cat -e
 $
 $>
+*/
+
+#include <unistd.h>
+int main(int argc, char *argv[])
+{
+    int i;
+    char c;
+    i=0;
+    if(argc ==2)
+    {
+        while(argv[1][i])
+        {
+            if((argv[1][i] >= 65 && argv[1][i] <= 77) || (argv[1][i] >= 97 && argv[1][i] <= 109))
+            {
+                c = argv[1][i] + 13;
+                write(1, &c,1);
+            }
+            else if((argv[1][i] > 77 && argv[1][i] <= 90) || (argv[1][i] > 109 && argv[1][i] <= 122))
+            {
+                c= argv[1][i] - 13;
+                write(1,&c,1);       
+            }
+            else
+                write(1,&argv[1][i],1);  
+        i++;
+        }
+    }
+    write(1,"\n",1);
+    return(0);
+}
