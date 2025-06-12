@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 13:40:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/02/10 17:17:02 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:44:18 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <bsd/string.h>
+//# include <bsd/string.h>
 
 typedef struct s_list
 {

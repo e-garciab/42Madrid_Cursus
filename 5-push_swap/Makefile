@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/06/11 21:32:34 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/06/12 14:41:12 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 #Archivos fuente
-SRCS = push_swap.c \
+SRCS = main.c \
+	# parser.c \
+	# push_swap.c \
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)
@@ -36,7 +38,7 @@ $(LIBFT) :
 
 #Compilación del programa y enlace con libft
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 #Compilación de objetos individuales
 %.o: %.c
