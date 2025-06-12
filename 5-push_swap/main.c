@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:30:56 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/12 14:41:14 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/12 18:04:45 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,82 @@ char **get_args(int argc, char *argv[])
 	return(args);
 }
 
+int ft_is_valid_number(char *str)
+{
+    int i;
+
+    i=0;
+    if(!str || str[0] == '\0')
+        return(0);
+    if(str[i] == '+' || str[i] == '-')
+        i++;
+    if(str[i] == '\0')
+        return(0);
+    while(str[i])
+    {
+        if(!ft_isdigit(str[i]))
+            return(0);
+        i++;
+    }
+    return(1);
+}
+
+int ft_atoi_safe(char *str)
+{
+    int i;
+    int sign;
+    long result;
+
+    i=0;
+    sign=1;
+    result=0;
+
+    if(!str || str[0] = '\0')
+		return(0);
+	while ((str[i]) && (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13)))
+		i++;
+    if(str[i] == '+' || str[i] == '-')
+    {
+        if(str[i] == '-')
+            sign = -1;
+        i++;
+    }
+    if (str[i] == '+' || str[i] == '-')
+		return (0);
+    while ((str[i]) >= '0' && (str[i]) <= '9')
+    {
+        result = result * 10 + (str[i] - '0');
+        if ((sign == 1 && result > 2147483647) || (sign == -1 && result < -2147483648))
+        {
+            write (2, "Error\n", 6);
+            return(0);
+        }
+        i++;
+    }
+    return(result * sign);
+}
+
+int	ft_has_duplicates(char **args)
+{
+    int i;
+    int j;
+
+    i=0;
+    while (args[i])
+    {
+        j = i + 1;
+        while (args[j])
+        {
+            if ((ft_atoi_safe(args[i])) == (ft_atoi_safe(args[j])))
+                return(1);
+            j++;
+        }
+        i++;
+    }
+    return(0);
+}
+
+
 int main(int argc, char *argv[])
 {
 	char **args;
@@ -99,7 +175,22 @@ int main(int argc, char *argv[])
 		write(2, "Error\n", 6);
 		return(1);
 	}
-	// solo para verificación
+	while(args[i])
+	{
+		if(!ft_is_valid_number(args[i]))
+		{
+			write(2, "Error\n", 6);
+			return(1);
+		}
+		i++;
+	}
+	if(ft_has_duplicates(args))
+	{
+		write(2, "Error\n", 6);
+		return(1);
+	}
+	//	solo para verificación
+	i=0;
 	while(args[i])
 	{
 		printf("%s\n", args[i]);
