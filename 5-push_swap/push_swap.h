@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:30:12 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/12 14:41:09 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:07:00 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stddef.h>
+# include <limits.h>
+# include "libft/libft.h"
 
 /*
 typedef struct s_list
@@ -26,4 +28,4 @@ typedef struct s_list
 }					t_list;
 */
 
-#endif
+#endif /*PUSH_SWAP_H*/

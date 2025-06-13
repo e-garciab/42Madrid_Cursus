@@ -6,16 +6,16 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/06/12 14:41:12 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/06/13 15:06:58 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #Nombre del ejecutabe
 NAME = push_swap
 
-#Datos de la libft
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+#Configuración de la libft
+LIBFT_DIR = libft # guarda el nombre del directorio donde está la libft
+LIBFT = $(LIBFT_DIR)/libft.a #contiene la ruta del archivo libft.a cuando se compila la libft
 
 #compilador y flags de compilación
 CC = cc
@@ -30,13 +30,15 @@ SRCS = main.c \
 OBJS = $(SRCS:.c=.o)
 
 #Regla principal
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME) #para construir all, primero compila la libft y después comopila el programa
 
-#Compilación de la libft
+
+#Regla para compilar libft (le dice a make que ejecute el makefile dentro del directorio libft/)
 $(LIBFT) :
 	$(MAKE) -C $(LIBFT_DIR)
 
-#Compilación del programa y enlace con libft
+
+#Regla para compilar el programa con lift.a (compila el ejecutable con los .o y enlaza libft.a, con -o NAME crea el binario final llamado push_swap)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
