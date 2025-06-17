@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/06/13 15:06:58 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/06/17 16:23:24 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = push_swap
 
 #Configuración de la libft
-LIBFT_DIR = libft # guarda el nombre del directorio donde está la libft
+LIBFT_DIR = libft# guarda el nombre del directorio donde está la libft
 LIBFT = $(LIBFT_DIR)/libft.a #contiene la ruta del archivo libft.a cuando se compila la libft
 
 #compilador y flags de compilación
@@ -23,8 +23,11 @@ CFLAGS = -Wall -Wextra -Werror
 
 #Archivos fuente
 SRCS = main.c \
-	# parser.c \
-	# push_swap.c \
+	ft_free_split.c \
+	parser_utils.c \
+	parser.c \
+	stack.c \
+	stack_utils.c
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)
