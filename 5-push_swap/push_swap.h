@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:30:12 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/17 17:34:03 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/18 18:11:35 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,13 @@ void	ft_node_add_back(t_node **stack, t_node *new);
 t_node *ft_init_stack_a(int *numbers, int total_args);
 
 
-//MOVEMENTS
-void sa_swap_a(t_node **stack_a);  // Swap the first 2 elements at the top of the stack a. Does nothing if there is only one or none. 
-void sb_swap_b(t_node **stack_b);  // Swap the first 2 elements at the top of the stack b. Does nothing if there is only one or none. 
-void ss_swap_ab(t_node **stack_a, t_node **stack_b); // sa and sb at the same time. 
-
-void pa_push_a(t_node **stack_a, t_node **stack_b); // push top de b a a. Takes the first element on top of b and puts it on a. Does nothing if b is empty. 
-void pb_push_b(t_node **stack_a, t_node **stack_b); // push top de a a b. Takes the first element on top of a and puts it on b. Does nothing if a is empty. 
-
-void ra_rotate_a(t_node **stack_a); // rotate up stack a. Shifts all the elements of the stack a up by one position. The first element becomes the last. 
-void rb_rotate_b(t_node **stack_b); // rotate up stack b. Shifts all the elements of the stack b one position upwards. The first element becomes the last one. 
-void rr_rotate_ab(t_node **stack_a, t_node **stack_b); // ra y rb simultáneo
-
-void rra_reverse_rotate_a(t_node **stack_a); // rotate down stack a. Shifts all elements of the stack down one position. the stack a. The last element becomes the first. 
-void rrb_reverse_rotate_b(t_node **stack_b); // rotate down stack b. Shifts all the elements of the stack b one position downwards. the stack b. The last element becomes the first. 
-void rrr_reverse_rotate_ab(t_node **stack_a, t_node **stack_b); // rra y rrb simultáneo
-
-
-
-
-
-
-
+void swap(t_node **stack, char flag);
+void ss_swap (t_node **stack_a, t_node **stack_b);
+void push(t_node **stack_a, t_node **stack_b, char flag);
+void rotate(t_node **stack, char flag);
+void rr_rotate (t_node **stack_a, t_node **stack_b);
+void reverse_rotate(t_node **stack, char flag);
+void rrr_reverse_rotate (t_node **stack_a, t_node **stack_b);
 
 
 #endif /*PUSH_SWAP_H*/

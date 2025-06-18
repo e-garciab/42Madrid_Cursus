@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/06/17 16:23:24 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/06/18 18:07:28 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,11 @@ SRCS = main.c \
 	ft_free_split.c \
 	parser_utils.c \
 	parser.c \
-	stack.c \
-	stack_utils.c
+	stack_utils.c \
+	ops_swap_and_push.c \
+	ops_rotate_and_rev_rotate.c
+	
+	
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)

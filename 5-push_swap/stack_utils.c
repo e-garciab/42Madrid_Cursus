@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:20:21 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/17 16:22:38 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:33:46 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,26 @@ void	ft_node_add_back(t_node **stack, t_node *new)
 	temp -> next = new;
 }
 
-
-
+t_node *ft_init_stack_a(int *numbers, int total_args)
+{
+    t_node *stack_a;
+    t_node *node;
+    int i;
+    
+    stack_a = NULL;
+    i=0;
+    while(i < total_args)
+    {
+        node = ft_new_node(numbers[i]);
+        if (!node)
+        {    
+            ft_free_stack(stack_a);
+            return(NULL);
+        }
+        ft_node_add_back(&stack_a, node);
+        i++;
+    }
+    return(stack_a);
+}
 
 

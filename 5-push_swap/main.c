@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:30:56 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/17 17:33:59 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:56:59 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,23 @@ void	ft_free_stack(t_node *stack)
 		free(tmp);
 	}
 }
+//SOLO PARA VERIFICACION; SE PUEDE BORRAR ANTES DE ENTREGAR
+void	print_stack(t_node *stack)
+{
+	while (stack)
+	{
+		printf("%d\n", stack->value);
+		stack = stack->next;
+	}
+}
 
 int main(int argc, char *argv[])
 {
 	int *numbers;
 	int total_args;
 	t_node *stack_a;
-	t_node *temp;
+	t_node *stack_b;
+	// t_node *temp;
 	
 	if(argc<2)
 		return(0);
@@ -37,6 +47,7 @@ int main(int argc, char *argv[])
 	if(!numbers)
 		return(1);
 	stack_a = ft_init_stack_a(numbers, total_args);
+	stack_b = NULL;
 	if(!stack_a)
 	{
 		free(numbers);
@@ -44,18 +55,32 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	// solo para verificacion
-	temp = stack_a;
-	while(temp)
-	{
-		printf("Antes: %d\n", temp->value);
-		temp = temp -> next;
-	}
-	temp = 	sa_swap_a(stack_a);
-	while(temp)
-	{
-		printf("Despues: %d\n", temp->value);
-		temp = temp -> next;
-	}
+	// mostrar valores originales
+	printf("Antes stack A: \n");
+	print_stack(stack_a);
+	printf("Antes stack B: \n");
+	print_stack(stack_b);
+
+	reverse_rotate(&stack_a, 'a');
+
+	printf("Después stack A: \n");
+	print_stack(stack_a);
+	printf("Después stack B: \n");
+	print_stack(stack_b);
+	
+		
+	// temp = stack_a;
+	// while(temp)
+	// {
+	// 	printf("Antes: %d\n", temp->value);
+	// 	temp = temp -> next;
+	// }
+	// temp = 	sa_swap_a(stack_a);
+	// while(temp)
+	// {
+	// 	printf("Despues: %d\n", temp->value);
+	// 	temp = temp -> next;
+	// }
 	free(numbers);
 	ft_free_stack(stack_a);
 	return (0);
