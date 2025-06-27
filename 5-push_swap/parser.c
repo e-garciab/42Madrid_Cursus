@@ -6,21 +6,21 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 13:03:49 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/17 16:22:42 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/27 17:29:45 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_count_total_args(int argc, char *argv[])
+int count_total_args(int argc, char *argv[])
 {
 	char **split;
 	int i;
 	int j;
-	int total_args;
+	int count;
 
 	i= 1;
-	total_args=0;
+	count=0;
 	while (i< argc)
 	{
 		split = ft_split (argv[i], ' ');
@@ -29,16 +29,15 @@ int ft_count_total_args(int argc, char *argv[])
 		j=0;
 		while(split[j])
 		{
-			total_args++;
+			count++;
 			j++;
 		}
 		ft_free_split(split);
 		i++;
 	}
-	return(total_args);
+	return(count);
 }
-
-int ft_fill_args(int argc, char *argv[], char **args)
+static int normalize_args(int argc, char *argv[], char **args) //Convierte todos los argumentos (incluso si vienen agrupados como string con espacios) en un array plano de strings (args)
 {
 	char **split;
 	int i;
@@ -66,22 +65,21 @@ int ft_fill_args(int argc, char *argv[], char **args)
 	return(1);
 }
 
-char **get_args(int argc, char *argv[], int *total_args)
+static char **create_args_array(int argc, char *argv[], int total_args) //Reserva memoria para ese array plano de strings (args) y lo llena usando ft_fill_args.
 {
 	char **args;
 
-	*total_args = ft_count_total_args(argc, argv);
-	args = malloc((*total_args + 1) * sizeof(char *));
+	args = malloc((total_args + 1) * sizeof(char *));
 	if(!args)
 		return(NULL);
-	if(!ft_fill_args(argc, argv, args))
+	if(!normalize_args(argc, argv, args))
 	{
 		free(args);
 		return(NULL);
 	}
 	return(args);
 }
-int ft_fill_numbers_array(char **args, int *numbers, int total_args)
+static int convert_args_to_ints(char **args, int *numbers, int total_args) //recorre el array de string, verifica que sea un numero válido y convierto cada string a int, guardandolo en el array numbers.
 {
 	int i;
 	int num;
@@ -103,20 +101,20 @@ int ft_fill_numbers_array(char **args, int *numbers, int total_args)
 	return(1);
 }
 
-int *parse_args(int argc, char *argv[], int *total_args)
+int *parse_args(int argc, char *argv[], int total_args) //orquesta todo el proceso y devuelve el array final de enteros 
 {
 	char **args;
 	int *numbers;
 
-	args = get_args(argc, argv, total_args);
+	args = create_args_array(argc, argv, total_args);
 	if(!args)
 		return(write(2, "Error\n", 6), NULL);
-	numbers=malloc((*total_args + 1) * (sizeof(int)));
+	numbers=malloc((total_args + 1) * (sizeof(int)));
 	if(!numbers)
 		return(NULL);
-	if(!ft_fill_numbers_array(args, numbers, *total_args))
+	if(!convert_args_to_ints(args, numbers, total_args))
 		return(NULL);
-	if(ft_has_duplicates(numbers, *total_args))
+	if(ft_has_duplicates(numbers, total_args))
 	{
 		write(2, "Error\n", 6);
 		free(numbers);
@@ -124,4 +122,8 @@ int *parse_args(int argc, char *argv[], int *total_args)
 	}
 	return(numbers);	
 }
+
+
+
+
 

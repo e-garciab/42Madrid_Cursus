@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:04:46 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/18 18:11:57 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/27 13:51:05 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void push(t_node **stack_a, t_node **stack_b, char flag)
     t_node *top_src;
     if(flag == 'a')
     {
-        if(!stack_b || !*stack_b || !(*stack_b) -> next)
+        if(!stack_b || !*stack_b)
             return ;
         top_src = *stack_b;
         *stack_b = top_src->next;
@@ -53,7 +53,7 @@ void push(t_node **stack_a, t_node **stack_b, char flag)
     } 
     else if(flag == 'b')
     {
-        if(!stack_a || !*stack_a || !(*stack_a) -> next)
+        if(!stack_a || !*stack_a)
             return ;
         top_src = *stack_a;
         *stack_a = top_src->next;

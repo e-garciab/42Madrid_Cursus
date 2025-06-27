@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 12:49:00 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/17 16:22:44 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/27 13:55:38 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int ft_is_valid_number(char *str)
     return(1);
 }
 
-int ft_check_sign(char *str, int *i)
+static int ft_check_sign(char *str, int *i)
 {
 	int sign;
 
@@ -46,7 +46,7 @@ int ft_check_sign(char *str, int *i)
 	return(sign);
 }
 
-int	ft_check_limits(long result, int sign)
+static int	ft_check_limits(long result, int sign)
 {
 	if ((sign == 1 && result > INT_MAX) || (sign == -1 && result > (long)INT_MAX + 1))
         {

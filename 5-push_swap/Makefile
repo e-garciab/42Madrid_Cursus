@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/06/18 18:07:28 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/06/27 17:34:12 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,14 +23,15 @@ CFLAGS = -Wall -Wextra -Werror
 
 #Archivos fuente
 SRCS = main.c \
-	ft_free_split.c \
+	free_fts.c \
 	parser_utils.c \
 	parser.c \
 	stack_utils.c \
 	ops_swap_and_push.c \
-	ops_rotate_and_rev_rotate.c
-	
-	
+	ops_rotate_and_rev_rotate.c \
+	sort_2_and_3.c \
+	sort_4_and_5.c \
+	radix_sort.c
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)

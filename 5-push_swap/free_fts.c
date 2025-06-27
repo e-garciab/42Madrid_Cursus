@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_split.c                                    :+:      :+:    :+:   */
+/*   free_fts.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/17 12:50:08 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/17 16:22:47 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/06/27 14:01:34 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/06/27 14:02:08 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,16 @@ void ft_free_split(char **split)
 		i++;
 	}
 	free(split);
+}
+
+void	ft_free_stack(t_node *stack)
+{
+	t_node *tmp;
+
+	while (stack)
+	{
+		tmp = stack;
+		stack = stack->next;
+		free(tmp);
+	}
 }
