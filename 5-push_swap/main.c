@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:30:56 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/27 19:37:41 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:40:43 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ static void select_sort_method(t_node **stack_a, t_node **stack_b, int total_arg
         sort_5(stack_a, stack_b);
     else
         radix_sort(stack_a, stack_b, total_args);
-}
-//SOLO PARA VERIFICACION; SE PUEDE BORRAR ANTES DE ENTREGAR
-void	print_stack(t_node *stack)
-{
-	while (stack)
-	{
-		printf("Value: %d | Index: %d\n", stack->value, stack->index);
-		stack = stack->next;
-	}
 }
 
 static int init_program(int argc, char *argv[], t_node **stack_a, t_node **stack_b)
@@ -86,25 +77,7 @@ int main(int argc, char *argv[])
 		return(0);
 	}
 	assign_index(stack_a);
-	//select_sort_method(&stack_a, &stack_b, count_total_args(argc, argv));
-	
-	// // SOLO PARA VERIFICACIÓN:
-	// // mostrar valores originales
-	printf("Antes stack A: \n");
-	print_stack(stack_a);
-	printf("Antes stack B: \n");
-	print_stack(stack_b);
-	printf("-----------------\n");
-	
-	select_sort_method(&stack_a, &stack_b, count_total_args(argc, argv));	
-	printf("-----------------\n");
-
-	printf("Después stack A: \n");
-	print_stack(stack_a);
-	printf("Después stack B: \n");
-	print_stack(stack_b);
-	printf("-----------------\n");
-	
+	select_sort_method(&stack_a, &stack_b, count_total_args(argc, argv));
 	ft_free_stack(stack_a);
 	ft_free_stack(stack_b);
 	return (0);

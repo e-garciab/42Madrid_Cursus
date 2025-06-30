@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 12:30:12 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/27 17:43:32 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:42:51 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_stack
 
 int main(int argc, char *argv[]);
 void ft_free_split(char **split);
+void ft_free_stack(t_node *stack);
 int count_total_args(int argc, char *argv[]);
 int *parse_args(int argc, char *argv[], int total_args);
 int ft_is_valid_number(char *str);
@@ -42,7 +43,7 @@ int	ft_has_duplicates(int *array, int len);
 t_node *ft_init_stack_a(int *numbers, int total_args);
 void assign_index(t_node *stack);
 int stack_size (t_node *stack_a);
-void ft_free_stack(t_node *stack);
+
 void swap(t_node **stack, char flag);
 void ss_swap (t_node **stack_a, t_node **stack_b);
 void push(t_node **stack_a, t_node **stack_b, char flag);

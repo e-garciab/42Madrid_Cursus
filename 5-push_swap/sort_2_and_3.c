@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 13:03:48 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/06/27 17:44:51 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/06/30 14:10:08 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void sort_3 (t_node **stack_a)
         swap(stack_a, 'a');
     else if(first < second && second > third && first > third)     //caso 3: 2 3 1
         reverse_rotate(stack_a, 'a');
-    else if(first > second && second > first)     //caso 4: 3 2 1
+    else if(first > second && second > third)     //caso 4: 3 2 1
     {
         swap(stack_a, 'a');
         reverse_rotate(stack_a, 'a');
