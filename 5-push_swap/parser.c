@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 13:03:49 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/02 12:01:04 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/02 12:23:56 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ static char	**create_args_array(int argc, char *argv[], int total_args)
 }
 static int	convert_args_to_ints(char **args, int *numbers, int total_args)
 		// recorre el array de string,
-		verifica que sea un numero válido y convierto cada string a int,
-		guardandolo en el array numbers.
+		// verifica que sea un numero válido y convierto cada string a int,
+		// guardandolo en el array numbers.
 {
 	int i;
 	int num;
