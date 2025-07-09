@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 18:55:05 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/02 11:52:20 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/09 14:54:47 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ static char	*ft_allocate_words(const char *s, char c)
 {
 	size_t	len_letters;
 	char	*dest;
-	size_t	i;
-	size_t	j;
 
-	i = 0;
-	j = 0;
 	len_letters = ft_count_letters(s, c);
 	dest = malloc((len_letters + 1) * sizeof(char));
 	if (!dest)

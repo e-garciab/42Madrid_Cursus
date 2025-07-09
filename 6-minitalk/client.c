@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/07 17:13:58 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/09 15:02:55 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ int main(int argc, char *argv[])
         write(2, "Too few arguments", 17);
         return(1);
     }
-    pid = atoi(argv[1]);
-    if(kill(pid, SIGUSR1) == -1)
-    {
-        write(2, "Error sending signal", 20);
-        return(1);
-    }
+    pid = ft_atoi(argv[1]);
+    kill(pid, SIGUSR1);
+    usleep(100);
+    kill(pid, SIGUSR2);
+    // if(kill(pid, SIGUSR1) == -1)
+    // {
+    //     write(2, "Error sending signal", 20);
+    //     return(1);
+    //}
     return(0);
 }
