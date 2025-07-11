@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/09 15:02:55 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:40:43 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@
 // Create a stop condition so that the server knows when it has finished receiving the message
 
 
+void send_char(pid_t pid, char c)
+{
+    int i; 
+    i=7;
+
+    while (i>=0)
+    {
+        if((c >> i) & 1)
+            kill(pid, SIGUSR1);
+        else 
+            kill(pid, SIGUSR2);
+        usleep(100);
+        i--;
+    }
+}
+
 int main(int argc, char *argv[])
 {
     pid_t pid;
@@ -30,9 +46,8 @@ int main(int argc, char *argv[])
         return(1);
     }
     pid = ft_atoi(argv[1]);
-    kill(pid, SIGUSR1);
-    usleep(100);
-    kill(pid, SIGUSR2);
+    send_char(pid, 'A');
+    
     // if(kill(pid, SIGUSR1) == -1)
     // {
     //     write(2, "Error sending signal", 20);
