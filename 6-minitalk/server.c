@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:26 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/11 14:44:03 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/15 17:47:20 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,23 @@
 //         write(1, "Bit 1\n", 7);
 // }
 
+/*GUARDANDO TODO EL STRING EN UN BUFFER E IMPRIMIENDOLO AL FINAL*/
+/*
 void signal_handler(int sig, siginfo_t *info, void *context)
 {
     static int  bit_count; //cuenta cuántos bits han llegado
     static pid_t    client_pid; //guarda el pid del cliente actual
     static unsigned char    c; //almacena el caracter en construcción
-
-    bit_count=0;
-    c=0;
+    static char buffer[BUFFER_SIZE]; //espacio donde iremos guardando cada caracter
+    static int index; //indicará la posición actual en el buffer (donde meter el siguiente caracter)
+    
     (void)context;
     if(client_pid != info->si_pid) //si el pid del cliente cambia, se resetea el caracter y el contador para evitar errores y mezclas.
     {
         bit_count = 0;
         c = 0;
+        index = 0;
+        memset(buffer, 0, BUFFER_SIZE);
     }
     client_pid=info->si_pid; // actualiza el client_pid para mantener el mismo emisor 
     c = c << 1; //desplaza los bits de c una posición a la izquierda, lo que abre un hueco al final para añadir un nuevo bit
@@ -49,11 +53,37 @@ void signal_handler(int sig, siginfo_t *info, void *context)
     bit_count++;
     if(bit_count == 8)
     {
-        write (1, &c, 1);
+        if(c == '\0') //significa que ya se ha recibido la cadena completa, hay que imprimirla
+        {
+            buffer[index] = '\0';
+            ft_putstr_fd(buffer, 1);
+            ft_putstr_fd("\n", 1);
+            index=0;
+        }
+        else
+        {
+            if(index < BUFFER_SIZE - 1)
+            {
+                buffer[index] = c;
+                index++;
+            }
+            else
+            {
+                ft_putstr_fd("Error: no space in buffer, message is too long\n", 2);
+                exit(EXIT_FAILURE);
+            }
+        }
         bit_count=0;
         c=0;
-    }   
+    }
+    if(kill(client_pid, SIGUSR2) == -1)
+    {
+        ft_putstr_fd("Error sending confirmation\n", 2);
+        exit(EXIT_FAILURE);
+    }
 }
+    
+*/
 /*DEBUG:
 
 01000001
@@ -88,14 +118,53 @@ int main(void)
 		c |= (1 << (7 - bit_count));
 */
 
+/*ENVIANDO A IMPRIMIR CARACTER A CARACTER*/
+
+void signal_handler(int sig, siginfo_t *info, void *context)
+{
+    static int  bit_count; //cuenta cuántos bits han llegado
+    static pid_t    client_pid; //guarda el pid del cliente actual
+    static unsigned char    c; //almacena el caracter en construcción
+    
+    (void)context;
+    if(client_pid != info->si_pid) //si el pid del cliente cambia, se resetea el caracter y el contador para evitar errores y mezclas.
+    {
+        bit_count = 0;
+        c = 0;
+    }
+    client_pid=info->si_pid; // actualiza el client_pid para mantener el mismo emisor 
+    c = c << 1; //desplaza los bits de c una posición a la izquierda, lo que abre un hueco al final para añadir un nuevo bit
+    if(sig == SIGUSR1)
+        c = c | 1; //asegura que el último bit es 1. Si la señal recibida fue SIGUSR2 no hace falta hacer nada porque al hacer el shift ya pusiste un cero al final.
+    bit_count++;
+    if(bit_count == 8)
+    {
+        if(c == '\0')
+        {
+            write(1, "\n", 1);
+            kill(client_pid, SIGUSR1); //REVISAR PARA BONUS - ENVIAR CONFIRMACIOIN DE FIN DEL MENSAJE.
+        }        
+        else 
+            write(1, &c, 1);
+        bit_count=0;
+        c=0;
+    }
+    if(kill(client_pid, SIGUSR2) == -1)
+    {
+        ft_putstr_fd("Error sending confirmation\n", 2);
+        exit(EXIT_FAILURE);
+    }
+}
+
+
 int main(void)
 {
     struct sigaction sa; //Creamos una instancia de la estructura que configurará la señal / creo la "caja"
-    printf("Server PID: %d\n", getpid()); // CUIDADO - CAMBIAR A MI FUNCION PRINTF
+    ft_printf("Server PID: %d\n", getpid()); // CUIDADO - CAMBIAR A MI FUNCION PRINTF
     sa.sa_sigaction= signal_handler; // qué función se debe ejecutar cuando llegue la señal
     sa.sa_flags = SA_SIGINFO;
     //sa.sa_mask = 
-    //sigemptyset(&sa.sa_mask); //sa_mask define qué señales se bloquean mientras se ejecuta el handler
+    sigemptyset(&sa.sa_mask); //sa_mask define qué señales se bloquean mientras se ejecuta el handler
         // sigemptyset indica que ninguna señal adicional será bloqueada durante la ejecución del handler.
     sigaction(SIGUSR1, &sa, NULL);
     sigaction(SIGUSR2, &sa, NULL);
