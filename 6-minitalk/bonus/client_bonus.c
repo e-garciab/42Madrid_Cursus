@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/16 20:10:43 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/16 18:54:11 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
-static void	send_bit(int server_pid, int bit)
+
+// Create a stop condition so that the server knows when it has finished receiving the message
+
+int		g_confirm_flag = 0; // VARIABLE GLOBAL
+
+static void	confirm_handler(int sig)
+{
+	if (sig == SIGUSR1)
+		g_confirm_flag = 1;
+	else if (sig == SIGUSR2)
+	{
+		ft_printf("Message received by server\n");
+		exit(EXIT_SUCCESS);
+	}
+}
+
+static void	send_bit(int pid, int bit)
 {
 	int	signal;
 
@@ -20,54 +36,59 @@ static void	send_bit(int server_pid, int bit)
 		signal = SIGUSR1;
 	else
 		signal = SIGUSR2;
-	if (kill(server_pid, signal) == -1)
+	if (kill(pid, signal) == -1)
 	{
 		ft_putstr_fd("Error sending signal\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	while (g_confirm_flag == 0)
+		pause();
+	g_confirm_flag = 0;
 }
 
-static void	send_char(int server_pid, unsigned char c)
+static void	send_char(int pid, unsigned char c)
 {
 	int	i;
 
 	i = 7;
 	while (i >= 0)
 	{
-		send_bit(server_pid, (c >> i) & 1);
-		usleep(200);
+		send_bit(pid, (c >> i) & 1);
+		// usleep(100);
 		i--;
 	}
 }
 
-static void	send_string(int server_pid, const char *str)
+static void	send_string(int pid, const char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
 	{
-		send_char(server_pid, str[i]);
+		send_char(pid, str[i]);
 		i++;
 	}
-	send_char(server_pid, '\0');
+	send_char(pid, '\0');
 }
 
 int	main(int argc, char *argv[])
 {
-	pid_t   server_pid;
+	pid_t   pid;
 
 	if (argc != 3)
 	{
 		ft_putstr_fd("Invalid number of arguments\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	server_pid = ft_atoi(argv[1]);
-	if (server_pid <= 0)
+	pid = ft_atoi(argv[1]);
+	if (pid <= 0)
 	{
 		ft_putstr_fd("Invalid PID\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	send_string(server_pid, argv[2]);
+	signal(SIGUSR1, confirm_handler);	
+	signal(SIGUSR2, confirm_handler);
+	send_string(pid, argv[2]);
 	return (0);
 }
