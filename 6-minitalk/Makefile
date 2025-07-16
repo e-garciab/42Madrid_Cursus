@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/07/14 17:03:37 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/07/16 11:58:12 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 #Compilation flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror # -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 #Source files
 SRCS_CLIENT = client.c
