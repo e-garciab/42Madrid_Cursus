@@ -6,16 +6,13 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/16 18:54:11 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/17 17:33:16 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-
-// Create a stop condition so that the server knows when it has finished receiving the message
-
-int		g_confirm_flag = 0; // VARIABLE GLOBAL
+int			g_confirm_flag = 0;
 
 static void	confirm_handler(int sig)
 {
@@ -54,7 +51,6 @@ static void	send_char(int pid, unsigned char c)
 	while (i >= 0)
 	{
 		send_bit(pid, (c >> i) & 1);
-		// usleep(100);
 		i--;
 	}
 }
@@ -74,7 +70,7 @@ static void	send_string(int pid, const char *str)
 
 int	main(int argc, char *argv[])
 {
-	pid_t   pid;
+	pid_t	pid;
 
 	if (argc != 3)
 	{
@@ -87,7 +83,7 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Invalid PID\n", 2);
 		exit(EXIT_FAILURE);
 	}
-	signal(SIGUSR1, confirm_handler);	
+	signal(SIGUSR1, confirm_handler);
 	signal(SIGUSR2, confirm_handler);
 	send_string(pid, argv[2]);
 	return (0);

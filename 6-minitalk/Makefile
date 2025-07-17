@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/11 12:29:38 by egarcia2          #+#    #+#              #
-#    Updated: 2025/07/16 20:15:00 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/07/17 18:40:37 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS_CLIENT = client.c
-SRCS_SERVER = server.c
+SRCS_SERVER = server.c \
+			server_utils.c
 SRCS_CLIENT_BONUS = ./bonus/client_bonus.c
 SRCS_SERVER_BONUS = ./bonus/server_bonus.c
 

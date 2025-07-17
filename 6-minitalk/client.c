@@ -6,11 +6,19 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/16 20:10:43 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/17 20:06:18 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+int			g_confirm_flag = 0;
+
+static void	confirm_handler(int sig)
+{
+	if (sig == SIGUSR1)
+		g_confirm_flag = 1;
+}
 
 static void	send_bit(int server_pid, int bit)
 {
@@ -25,6 +33,9 @@ static void	send_bit(int server_pid, int bit)
 		ft_putstr_fd("Error sending signal\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	while (g_confirm_flag == 0)
+		pause();
+	g_confirm_flag = 0;
 }
 
 static void	send_char(int server_pid, unsigned char c)
@@ -35,7 +46,6 @@ static void	send_char(int server_pid, unsigned char c)
 	while (i >= 0)
 	{
 		send_bit(server_pid, (c >> i) & 1);
-		usleep(200);
 		i--;
 	}
 }
@@ -55,7 +65,7 @@ static void	send_string(int server_pid, const char *str)
 
 int	main(int argc, char *argv[])
 {
-	pid_t   server_pid;
+	pid_t	server_pid;
 
 	if (argc != 3)
 	{
@@ -68,6 +78,7 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Invalid PID\n", 2);
 		exit(EXIT_FAILURE);
 	}
+	signal(SIGUSR1, confirm_handler);
 	send_string(server_pid, argv[2]);
 	return (0);
 }
