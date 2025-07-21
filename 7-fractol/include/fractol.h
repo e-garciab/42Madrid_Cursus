@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/19 16:48:37 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/19 17:04:34 by egarcia2         ###   ########.fr       */
+/*   Created: 2025/07/19 16:44:33 by egarcia2          #+#    #+#             */
+/*   Updated: 2025/07/21 11:23:55 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <./minilibx-linux/mlx.h>
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
-int main(void)
-{
-	void	*mlx_ptr;
-    void	*win_ptr;
+# include "../ft_printf/ft_printf.h"
+# include "../libft/libft.h"
+# include <signal.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <mlx.h>
+# include <stddef.h>
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx, 800, 600, "Hello MLX in WSL!");
-	mlx_loop(mlx);
-	return (0);
-}
+
+#endif /*FRACTOL_H*/
