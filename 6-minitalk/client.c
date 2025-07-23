@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:23 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/17 20:06:18 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/19 12:46:52 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ static void	send_bit(int server_pid, int bit)
 	g_confirm_flag = 0;
 }
 
-static void	send_char(int server_pid, unsigned char c)
+static void send_int(int server_pid, int num)
 {
-	int	i;
-
-	i = 7;
+	int i;
+	
+	i= 31;
 	while (i >= 0)
 	{
-		send_bit(server_pid, (c >> i) & 1);
+		send_bit(server_pid,(num >> i) & 1);
 		i--;
 	}
 }
@@ -53,19 +53,27 @@ static void	send_char(int server_pid, unsigned char c)
 static void	send_string(int server_pid, const char *str)
 {
 	int	i;
-
+	int bit;
+	
 	i = 0;
-	while (str[i] != '\0')
+	while (1)
 	{
-		send_char(server_pid, str[i]);
+		bit = 7;
+		while (bit >= 0)
+		{
+			send_bit(server_pid, (str[i] >> bit) & 1);
+			bit--;
+		}
+		if(str[i] == '\0')
+			break;
 		i++;
 	}
-	send_char(server_pid, '\0');
 }
 
 int	main(int argc, char *argv[])
 {
 	pid_t	server_pid;
+	int 	len;
 
 	if (argc != 3)
 	{
@@ -79,6 +87,8 @@ int	main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	signal(SIGUSR1, confirm_handler);
+	len = strlen(argv[2]) + 1;
+	send_int(server_pid, len);
 	send_string(server_pid, argv[2]);
 	return (0);
 }

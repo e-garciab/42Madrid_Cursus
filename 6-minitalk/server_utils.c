@@ -6,88 +6,87 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 11:54:26 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/17 19:56:34 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/19 12:45:21 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	finalize_message(char **buffer, int *index)
+static void reset_client(t_state *s, pid_t new_pid)
 {
-	ft_putstr_fd(*buffer, 1);
+	s->client_pid = new_pid;
+	s->bit_count = 0;
+	s->c = 0;
+	s->index = 0;
+	s->len_bits = 0;
+	s->message_len = 0;
+	s->expecting_len = 1;
+	if (s->buffer)
+	{
+		free(s->buffer);
+		s->buffer = NULL;
+	}
+}
+
+static void	allocate_memory(t_state *s)
+{
+	s->expecting_len = 0;
+	s->buffer = malloc(s->message_len + 1);
+	if(!s->buffer)
+	{
+		ft_putstr_fd("Malloc failed", 2);
+		exit(EXIT_FAILURE);
+	}
+	s->buffer[s->message_len] = '\0';
+}
+
+static void	finalize_message(t_state *s)
+{
+	ft_putstr_fd(s->buffer, 1);
 	ft_putstr_fd("\n", 1);
-	free(*buffer);
-	*buffer = NULL;
-	*index = 0;
+	free(s->buffer);
+	s->buffer = NULL;
+	s->index = 0;
+	s->expecting_len = 1;
+	s->len_bits = 0;
+	s->message_len = 0;
 }
 
-static void	allocate_char(int *index, char **buffer, unsigned char *c,
-		int *bit_count)
+static void process_char(t_state *s)
 {
-	char	*new_buff;
-
-	new_buff = malloc((*index + 1 + 1) * sizeof(char));
-	if (!new_buff)
+	if(s->expecting_len)
 	{
-		ft_putstr_fd("Memory allocation failed", 1);
-		exit(EXIT_FAILURE);
+		s->message_len = ((s->message_len << 8) | s->c );
+		s->len_bits += 8;
+		if(s->len_bits == 32)
+			allocate_memory(s);
 	}
-	if (*buffer)
+	else
 	{
-		ft_memcpy(new_buff, *buffer, *index);
-		free(*buffer);
+		s->buffer[s->index++] = s->c;
+		if(s->index == s->message_len)
+			finalize_message(s);
 	}
-	new_buff[*index] = *c;
-	new_buff[*index + 1] = '\0';
-	*buffer = new_buff;
-	(*index)++;
-	if (*c == '\0')
-		finalize_message(buffer, index);
-	*c = 0;
-	*bit_count = 0;
-}
-
-static void	send_signal_confirmation(pid_t client_pid)
-{
-	if (kill(client_pid, SIGUSR1) == -1)
-	{
-		ft_putstr_fd("Error sending signal acknowledgment\n", 2);
-		exit(EXIT_FAILURE);
-	}
-}
-
-static void	reset_client(int *bit_count, unsigned char *c, int *index,
-		char **buffer)
-{
-	*bit_count = 0;
-	*c = 0;
-	*index = 0;
-	if (*buffer)
-	{
-		free(*buffer);
-		*buffer = NULL;
-	}
+	s->c = 0; 
+	s->bit_count = 0;
 }
 
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
-	static int				bit_count;
-	static pid_t			client_pid;
-	static unsigned char	c;
-	static char				*buffer;
-	static int				index;
-
+	static t_state	s;
+	
 	(void)context;
-	if (client_pid != info->si_pid)
-	{
-		client_pid = info->si_pid;
-		reset_client(&bit_count, &c, &index, &buffer);
-	}
-	c = c << 1;
+	if (s.client_pid != info->si_pid)
+		reset_client(&s, info->si_pid);
+	s.c = s.c << 1;
 	if (sig == SIGUSR1)
-		c = c | 1;
-	bit_count++;
-	if (bit_count == 8)
-		allocate_char(&index, &buffer, &c, &bit_count);
-	send_signal_confirmation(client_pid);
+		s.c = s.c | 1;
+	s.bit_count++;
+	if (s.bit_count == 8)
+		process_char(&s);
+	if (kill(s.client_pid, SIGUSR1) == -1)
+	{
+		ft_putstr_fd("Error sending signal acknowledgment\n", 2);
+		exit(EXIT_FAILURE);
+	}
 }
