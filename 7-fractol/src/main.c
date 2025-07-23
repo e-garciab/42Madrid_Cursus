@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 12:30:54 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/22 15:53:24 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/23 11:23:51 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ int	main(int argc, char *argv[])
 	{
 		// ARGS CORRECTOS, LANZA EL PROGRAMA
         fractal.name = argv[1];
+		if (fractal.name == NULL)
+		{ //DEBUG
+			ft_putstr_fd("fractal->name is NULL\n", 2);
+		}//DEBUG
         // 1)Inicializar programa
         fractal_init(&fractal);
         // 2) Renderizdo en la ventana

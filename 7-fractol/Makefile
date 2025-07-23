@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/19 16:36:23 by egarcia2          #+#    #+#              #
-#    Updated: 2025/07/21 11:27:18 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/07/23 13:35:02 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = fractol
 
 #compilador y flags de compilación
 CC = cc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = src
 INCLUDE_DIR = include
@@ -26,6 +26,10 @@ MLX_DIR = minilibx-linux
 #Archivos fuente
 SRCS = \
 	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/init.c \
+	$(SRC_DIR)/render.c \
+	$(SRC_DIR)/math_utils.c \
+	$(SRC_DIR)/events.c \
 
 #Archivos objeto
 OBJS = $(SRCS:.c=.o)
