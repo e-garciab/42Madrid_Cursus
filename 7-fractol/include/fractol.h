@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 16:44:33 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/23 14:04:31 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/24 19:26:46 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ typedef struct s_fractal
     int     iteration_definition;
     double  shift_x;
     double  shift_y;
+    double  zoom;
+    double  julia_x;
+    double  julia_y;
 }   t_fractal;
 
 typedef struct s_complex
@@ -99,9 +102,12 @@ void    handle_pixel(int x, int t, t_fractal *fractal);
 double	map_value(double num, t_range old_range, t_range new_range);
 t_complex   sum_complex(t_complex z1, t_complex z2);
 t_complex   square_complex(t_complex z);
+double	ft_atof(const char *str);
 // ***hook_events***
 int key_handler(int keycode, t_fractal *fractal);
-int    close_handler(t_fractal *fractal);
+int close_handler(t_fractal *fractal);
+int mouse_handler(int button, int x, int y, t_fractal *fractal);
+
 
 
 #endif /*FRACTOL_H*/

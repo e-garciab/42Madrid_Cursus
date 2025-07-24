@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/19 16:36:23 by egarcia2          #+#    #+#              #
-#    Updated: 2025/07/23 13:35:02 by egarcia2         ###   ########.fr        #
+#    Updated: 2025/07/24 13:49:19 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = fractol
 
 #compilador y flags de compilación
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 
 SRC_DIR = src
 INCLUDE_DIR = include
