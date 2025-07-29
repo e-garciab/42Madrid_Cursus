@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 12:36:54 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/07/24 18:11:33 by egarcia2         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:19:14 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,20 @@ int	key_handler(int keycode, t_fractal *fractal)
 	else if (keycode == KEY_DOWN)
 		fractal->shift_y += (0.5 * fractal->zoom);
 	else if (keycode == KEY_PLUS)
-		fractal->iteration_definition += 10;
+		fractal->max_iter += 10;
 	else if (keycode == KEY_MINUS)
-		fractal->iteration_definition -= 10;
+		fractal->max_iter -= 10;
 	fractal_render(fractal);
 	return (0);
 }
 
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-	if (button == Button5) // zoom in
+	(void) x;
+	(void) y;
+	if (button == SCROLL_UP)
 		fractal->zoom *= 1.05;
-	else if (button == Button4) // zoom out
+	else if (button == SCROLL_DOWN)
 		fractal->zoom *= 0.95;
 	fractal_render(fractal);
 	return (0);
