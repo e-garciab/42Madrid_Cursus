@@ -1,0 +1,58 @@
+Estructura y parsing
+philo/
+├── Makefile
+├── philo.h          ← structs, includes, prototipos
+├── main.c           ← entry point, init, launch
+├── parsing.c        ← validación de argumentos
+├── init.c           ← inicialización de structs y mutex
+├── routine.c        ← lógica del filósofo (comer, dormir, pensar)
+├── monitor.c        ← hilo que vigila si alguien muere
+└── utils.c          ← get_time, ft_usleep, print_state, etc.
+
+
+
+INIT_DATA()
+│
+├── data->start_time = get_time_ms()  ← necesita utils.c listo
+├── pthread_mutex_init(death_mutex)
+├── pthread_mutex_init(print_mutex)
+│
+├── INIT_FORKS()
+│   └── pthread_mutex_init(forks[i])  ← candados de tenedores
+│
+└── INIT_PHILOS()
+    ├── philo[i].id = i + 1
+    ├── philo[i].meals_eaten = 0
+    ├── philo[i].last_meal_time = start_time
+    ├── philo[i].data = data          ← teléfono a la oficina
+    ├── philo[i].left_fork  = &forks[i]
+    ├── philo[i].right_fork = &forks[(i+1) % N]
+    ├── pthread_mutex_init(meal_mutex)
+    └── philo[i].thread 
+
+
+
+    ## Flujo visual completo hasta ahora
+```
+main()
+│
+├── check_args()     → valida y guarda argumentos
+├── init_data()      → crea filósofos, tenedores, mutex
+├── launch_philos()  → arranca N hilos
+│
+│   Cada hilo ejecuta routine():
+│   ├── ¿1 filósofo? → one_philo() → muere
+│   ├── ¿par? → espera 1ms (anti-deadlock)
+│   └── BUCLE:
+│       ├── philo_eat()
+│       │   ├── lock izquierdo
+│       │   ├── lock derecho
+│       │   ├── actualiza last_meal_time
+│       │   ├── ft_usleep(time_to_eat)
+│       │   └── unlock tenedores
+│       ├── ft_usleep(time_to_sleep)
+│       └── "is thinking"
+│
+├── [monitor → siguiente paso]
+├── join_philos()    → espera a que todos terminen
+└── cleanup()        → libera memoria y mutex
