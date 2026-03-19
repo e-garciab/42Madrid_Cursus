@@ -1,3 +1,11 @@
 ./fractol julia -0.8 0.156
 ./fractol julia 0.285 0.01
 ./fractol julia -0.4 0.6
+
+./fractol julia  0.285 +0
+./fractol julia -0.70176 -0.3842
+./fractol julia -0.835 -0.2321 
+./fractol julia -0.7269 +0.1889
+./fractol julia 0.4 +0.4        
+
+
