@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 10:02:51 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/19 07:57:41 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/20 18:03:24 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,25 @@ int main (int argc, char *argv[])
         cleanup (&data);
         return(1);
     }
-    printf("filosofos: %d | Die: %ld | Eat: %ld | Sleep: %ld | Must eat: %d\n", data.nbr_philos, data.time_to_die, data.time_to_eat, data.time_to_sleep, data.nbr_must_eat);
+    //printf("filosofos: %d | Die: %ld | Eat: %ld | Sleep: %ld | Must eat: %d\n", data.nbr_philos, data.time_to_die, data.time_to_eat, data.time_to_sleep, data.nbr_must_eat);
     if(!launch_philos(&data))
     {
+        join_philos(&data);
         cleanup (&data);
         return(1);  
     }
     if(pthread_create(&monitor, NULL, monitor_routine, &data) != 0)
     {
+       join_philos(&data);
        cleanup (&data);
        return(1);   
     }
-    if(pthread_join(monitor, NULL) != 0)
-    {
-       cleanup (&data);
-       return(1);  
-    }
-    if(!join_philos(&data))
-    {
-        cleanup (&data);
-        return(1);  
-    }
+    pthread_join(monitor, NULL);
+    join_philos(&data);
     cleanup (&data);
     return(0);   
 }
+
     
 
 

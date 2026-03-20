@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:47:41 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/19 07:57:29 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/20 20:37:41 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ static int init_forks(t_data *data)
     while (i < data->nbr_philos)
     {
         if(pthread_mutex_init(&data->forks[i], NULL) != 0)
+        {
+            free(data->forks);
+            data->forks = NULL;
             return(0);
+        }
         i++;
     }
     return(1);
@@ -41,12 +45,16 @@ static int init_philos(t_data *data)
     {
         data->philos[i].philo_id = i + 1;
         data->philos[i].meals_eaten = 0;
-        data->philos[i].last_meal_time = data-> start_time; // ???
+        data->philos[i].last_meal_time = 0; // ???
         data->philos[i].data = data;
         data->philos[i].left_fork = &data->forks[i];
         data->philos[i].right_fork = &data->forks[(i+1) % data->nbr_philos];
         if(pthread_mutex_init(&data->philos[i].meal_mutex, NULL) != 0)
+        {
+            free(data->forks);
+            data->forks = NULL;
             return(0);
+        }
         i++;  
     }
     return(1);
@@ -54,8 +62,11 @@ static int init_philos(t_data *data)
 
 int init_data(t_data *data)
 {
-    data->start_time = get_time_ms();
+    data->forks = NULL;
+    data->philos = NULL;
+    data->start_time = 0;
     data->simulation_over = 0;
+    data->ready = 0;
     if(!init_forks(data))
         return(0);
     if(!init_philos(data))
@@ -72,14 +83,19 @@ void    cleanup(t_data *data)
     int i;
 
     i = 0;
-    while (i < data->nbr_philos)
+    if(data->forks && data->philos)
     {
-        pthread_mutex_destroy(&data->forks[i]);
-        pthread_mutex_destroy(&data->philos[i].meal_mutex);
-        i++;
+        while (i < data->nbr_philos)
+        {
+            pthread_mutex_destroy(&data->forks[i]);
+            pthread_mutex_destroy(&data->philos[i].meal_mutex);
+            i++;
+        }
     }
     pthread_mutex_destroy(&data->death_mutex);
     pthread_mutex_destroy(&data->print_mutex);
-    free(data->forks);
-    free(data->philos);
+    if(data->forks)
+        free(data->forks);
+    if(data->philos)
+        free(data->philos);
 }
