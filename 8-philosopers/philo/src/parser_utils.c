@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 22:21:53 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/10 22:23:13 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 20:18:03 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,16 @@ int	ft_atoi_safe(char *str, long *out)
 		i++;
 	}
 	*out = (result * sign);
+	return (1);
+}
+
+int	exit_error(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	write(2, str, len);
 	return (1);
 }
