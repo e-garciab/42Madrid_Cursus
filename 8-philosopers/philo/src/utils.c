@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 10:15:49 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/22 21:57:12 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 22:40:31 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	print_state(t_philo *philo, char *state)
 	pthread_mutex_unlock(&philo->data->print_mutex);
 }
 
+/// @brief Check if the simulation is ready to start.
+/// @param data Pointer to the shared simulation data structure.
+/// @return Returns 1 if the simulation is ready, 0 otherwise.
 int	is_ready(t_data *data)
 {
 	int	result;

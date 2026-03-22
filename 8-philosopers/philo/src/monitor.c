@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:49:51 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/22 21:58:50 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 22:33:16 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static int	all_philos_full(t_data *data)
 	return (1);
 }
 
+/// @brief Mark the simulation as over.
+/// @param data Pointer to the shared simulation data structure.
 static void	set_simulation_over(t_data *data)
 {
 	pthread_mutex_lock(&data->death_mutex);
@@ -60,6 +62,9 @@ static void	set_simulation_over(t_data *data)
 	pthread_mutex_unlock(&data->death_mutex);
 }
 
+/// @brief Check if any philosopher has died.
+/// @param data Pointer to the shared simulation data structure.
+/// @return Returns 1 if a philosopher has died, 0 otherwise.
 static int	check_death(t_data *data)
 {
 	int	i;

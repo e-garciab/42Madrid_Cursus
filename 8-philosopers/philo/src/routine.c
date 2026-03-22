@@ -6,12 +6,16 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 09:01:13 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/22 21:56:50 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 22:39:16 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/// @brief  Make the philosopher think for a calculated duration.
+/// Computes a thinking time based on the philosopher's time to die, eat, 
+/// and sleep. Ensures that thinking does not exceed safe limits.
+/// @param philo Pointer to the philosopher structure.
 static void	philo_think(t_philo *philo)
 {
 	long	think_time;
@@ -26,6 +30,10 @@ static void	philo_think(t_philo *philo)
 	print_state(philo, "is thinking");
 }
 
+/// @brief Handle the case when there is only one philosopher.
+/// This function prints the state of taking one fork and waits 
+/// until the philosopher dies.
+/// @param philo Pointer to the philosopher structure.
 static void	one_philo(t_philo *philo)
 {
 	print_state(philo, "has taken a fork");
@@ -33,6 +41,9 @@ static void	one_philo(t_philo *philo)
 }
 
 /// @brief Philosopher eating routine with deadlock prevention.
+///  Handles fork acquisition based on the philosopher's ID to avoid deadlocks:
+///    - Even ID: pick up right fork first, then left.
+///    - Odd ID: pick up left fork first, then right.
 /// @param philo Pointer to the philosopher struct.
 static void	philo_eat(t_philo *philo)
 {

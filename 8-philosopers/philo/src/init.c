@@ -6,12 +6,16 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:47:41 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/22 20:25:16 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 22:41:38 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/// @brief Initialize the mutexes representing the forks.
+/// @param data  Pointer to the shared simulation data structure.
+/// @return Returns 1 if all forks are successfully initialized,
+/// 0 if allocation or mutex initialization fails.
 static int	init_forks(t_data *data)
 {
 	int	i;
@@ -33,6 +37,10 @@ static int	init_forks(t_data *data)
 	return (1);
 }
 
+/// @brief Initialize philosopher structures and their associated mutexes.
+/// @param data Pointer to the shared simulation data structure.
+/// @return Returns 1 if all philos and mutexes are successfully initialized,
+/// 0 if allocation or mutex initialization fails.
 static int	init_philos(t_data *data)
 {
 	int	i;
@@ -60,6 +68,13 @@ static int	init_philos(t_data *data)
 	return (1);
 }
 
+/// @brief Initialize all simulation data.
+/// Sets initial values for forks, philosophers, start time, and control flags.
+/// Calls init_forks() and init_philos() to allocate and initialize resources.
+/// Initializes global mutexes for death checking, printing, and readiness sync.
+/// @param data Pointer to the shared simulation data structure.
+/// @return Returns 1 if all initialization steps succeed,
+/// 0 if any allocation or mutex initialization fails.
 int	init_data(t_data *data)
 {
 	data->forks = NULL;
@@ -80,6 +95,8 @@ int	init_data(t_data *data)
 	return (1);
 }
 
+/// @brief Free all allocated resources and destroy mutexes.
+/// @param data Pointer to the shared simulation data structure.
 void	cleanup(t_data *data)
 {
 	int	i;
