@@ -6,7 +6,7 @@
 #    By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/26 21:37:29 by egarcia2          #+#    #+#              #
-#    Updated: 2026/03/19 08:00:21 by egarcia2         ###   ########.fr        #
+#    Updated: 2026/03/22 13:27:39 by egarcia2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = philo
 
 #compilation flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
 #program directories
 INCLUDE_DIR = include

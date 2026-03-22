@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/14 09:01:13 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/20 21:20:48 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 13:15:15 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ void *routine(void *arg)
     t_philo *philo; 
     
     philo = (t_philo *)arg; //¿¿¿????
+    while(!is_ready(philo->data))
+        continue;
     if(philo->data->nbr_philos == 1)
     {
         one_philo(philo);
         return(NULL);
     }
-    while(!philo->data->ready)
-        continue;
     // Retraso inicial — pares esperan 1ms, impares esperan más
     if(philo->philo_id %2 == 0) //si es un nº de philo par
         ft_usleep(philo->data->time_to_eat, philo->data);
@@ -136,7 +136,9 @@ int launch_philos(t_data *data)
         data->philos[i].last_meal_time = data->start_time;
         i++;
     }
+    pthread_mutex_lock(&data->ready_mutex);
     data->ready = 1;
+    pthread_mutex_unlock(&data->ready_mutex);
     return(1);
 }
 

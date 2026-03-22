@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 21:46:48 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/20 20:35:39 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 12:45:03 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-// ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep 
-// [number_of_times_each_philosopher_must_eat]
 typedef struct s_data	t_data;
 
 typedef struct s_philo
@@ -29,7 +27,7 @@ typedef struct s_philo
 	int					philo_id;
 	int					meals_eaten;
 	long				last_meal_time;
-	pthread_t           thread;         //el hilo de cada philo
+	pthread_t           thread;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	pthread_mutex_t     meal_mutex;     //protege last_meal_time y meals_eaten ??
@@ -51,6 +49,7 @@ typedef struct s_data
 	pthread_mutex_t     print_mutex;        //protege los prints ??
 	t_philo             *philos;            //array de philos
 	int					ready;
+	pthread_mutex_t		ready_mutex;
 }						t_data;
 
 /* parser */
@@ -67,6 +66,7 @@ long					get_time_ms(void);
 void					ft_usleep(long ms, t_data *data);
 int						is_simulation_over(t_data *data);
 void					print_state(t_philo *philo, char *state);
+int is_ready(t_data *data);
 
 /*routine*/
 int						launch_philos(t_data *data);

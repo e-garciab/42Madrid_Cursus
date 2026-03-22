@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/08 10:15:49 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/19 07:58:17 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 12:39:34 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,12 @@ void print_state(t_philo *philo, char *state)
 		printf("%ld %d %s\n", timestamp, philo->philo_id, state);
 	}
 	pthread_mutex_unlock(&philo->data->print_mutex);	
+}
+int is_ready(t_data *data)
+{
+    int result;
+    pthread_mutex_lock(&data->ready_mutex);
+    result = data->ready;
+    pthread_mutex_unlock(&data->ready_mutex);
+    return (result);
 }

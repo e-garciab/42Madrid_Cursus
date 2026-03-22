@@ -6,7 +6,7 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 20:47:41 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/20 20:37:41 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 12:43:40 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int init_data(t_data *data)
         return(0);
     if(pthread_mutex_init(&data->print_mutex, NULL) != 0)
         return(0);
+    if(pthread_mutex_init(&data->ready_mutex, NULL) != 0)
+        return(0);
     return(1);
 }
 
@@ -94,6 +96,7 @@ void    cleanup(t_data *data)
     }
     pthread_mutex_destroy(&data->death_mutex);
     pthread_mutex_destroy(&data->print_mutex);
+    pthread_mutex_destroy(&data->ready_mutex);
     if(data->forks)
         free(data->forks);
     if(data->philos)
