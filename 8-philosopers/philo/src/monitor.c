@@ -6,82 +6,107 @@
 /*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/15 20:49:51 by egarcia2          #+#    #+#             */
-/*   Updated: 2026/03/22 13:27:50 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/03/22 22:33:16 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-static int philo_died(t_philo *philo)
+/// @brief Checks if a philosopher has exceeded time_to_die without eating.
+/// Reads last_meal_time under meal_mutex to avoid data races with philo_eat().
+/// @param philo Pointer to the philosopher to check.
+/// @return 1 if the philosopher has died, 0 otherwise.
+static int	philo_died(t_philo *philo)
 {
-	long time_since_last_meal;
-	
+	long	time_since_last_meal;
+
 	pthread_mutex_lock(&philo->meal_mutex);
 	time_since_last_meal = get_time_ms() - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->meal_mutex);
-	if(time_since_last_meal > philo->data->time_to_die)
-		return(1);
-	return(0);
+	if (time_since_last_meal > philo->data->time_to_die)
+		return (1);
+	return (0);
 }
-//Necesita el meal_mutex porque last_meal_time la escribe el filósofo en philo_eat() y la lee el monitor aquí — acceso concurrente → mutex obligatorio.
 
-static int all_philos_full(t_data *data)
+/// @brief Checks if all philosophers have eaten at least nbr_must_eat times.
+/// Returns 0 immediately if nbr_must_eat is -1 (no limit set).
+/// Reads meals_eaten under meal_mutex for each philosopher.
+/// @param data Pointer to shared simulation data.
+/// @return 1 if all philosophers are full, 0 otherwise.
+static int	all_philos_full(t_data *data)
 {
-	int i; 
-	
-	i=0;
-	if(data->nbr_must_eat == -1)
-		return(0);
-	while(i < data->nbr_philos)
+	int	i;
+
+	i = 0;
+	if (data->nbr_must_eat == -1)
+		return (0);
+	while (i < data->nbr_philos)
 	{
 		pthread_mutex_lock(&data->philos[i].meal_mutex);
-		if(data->philos[i].meals_eaten < data->nbr_must_eat)
+		if (data->philos[i].meals_eaten < data->nbr_must_eat)
 		{
 			pthread_mutex_unlock(&data->philos[i].meal_mutex);
-			return(0);
+			return (0);
 		}
 		pthread_mutex_unlock(&data->philos[i].meal_mutex);
 		i++;
 	}
-	return(1);
+	return (1);
 }
-// Si must_eat == -1 significa que no hay límite, devolvemos 0 directamente. Si algún filósofo ha comido menos de must_eat veces, devolvemos 0. Solo devolvemos 1 si TODOS han comido suficiente.
 
-static void set_simulation_over(t_data *data)
+/// @brief Mark the simulation as over.
+/// @param data Pointer to the shared simulation data structure.
+static void	set_simulation_over(t_data *data)
 {
 	pthread_mutex_lock(&data->death_mutex);
-	data->simulation_over=1;
+	data->simulation_over = 1;
 	pthread_mutex_unlock(&data->death_mutex);
 }
 
-void *monitor_routine(void *arg)
+/// @brief Check if any philosopher has died.
+/// @param data Pointer to the shared simulation data structure.
+/// @return Returns 1 if a philosopher has died, 0 otherwise.
+static int	check_death(t_data *data)
 {
-	t_data *data; 
-	int i;
-	
-	data = (t_data *)arg; //???¿¿¿
-	while(1)
+	int	i;
+
+	i = 0;
+	while (i < data->nbr_philos)
 	{
-		i=0;
-		while (i < data->nbr_philos)
+		if (philo_died(&data->philos[i]))
 		{
-			if(philo_died(&data->philos[i]))
-			{
-				pthread_mutex_lock(&data->print_mutex);
-				printf("%ld %d died\n", get_time_ms() - data->start_time, data->philos[i].philo_id);
-				pthread_mutex_unlock(&data->print_mutex);
-				set_simulation_over(data);
-				return(NULL);
-			}
-			i++;
-		}
-		if(all_philos_full(data))
-		{
+			pthread_mutex_lock(&data->print_mutex);
+			printf("%ld %d died\n", get_time_ms() - data->start_time,
+				data->philos[i].philo_id);
+			pthread_mutex_unlock(&data->print_mutex);
 			set_simulation_over(data);
-			return(NULL);
+			return (1);
 		}
-		usleep(500); //El usleep(500) al final del bucle evita que el monitor consuma el 100% de la CPU comprobando sin parar.
+		i++;
 	}
-	return(NULL);
+	return (0);
 }
 
+/// @brief Monitor thread entry point.
+/// Continuously checks for philosopher deaths and meal completion.
+/// Runs every 0.1ms. Prints the death message before setting simulation_over
+/// to ensure the message is not suppressed by print_state().
+/// @param arg Pointer to t_data cast as void*.
+/// @return Always NULL.
+void	*monitor_routine(void *arg)
+{
+	t_data	*data;
+
+	data = (t_data *)arg;
+	while (1)
+	{
+		if (check_death(data))
+			return (NULL);
+		if (all_philos_full(data))
+		{
+			set_simulation_over(data);
+			return (NULL);
+		}
+		usleep(100);
+	}
+	return (NULL);
+}
