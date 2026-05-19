@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: egarcia2 <egarcia2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: egarcia2 <egarcia2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 15:17:02 by egarcia2          #+#    #+#             */
-/*   Updated: 2025/04/02 14:18:35 by egarcia2         ###   ########.fr       */
+/*   Updated: 2026/05/19 21:47:15 by egarcia2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include "get_next_line.h"
+#include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -35,4 +35,4 @@ int	main(void)
 	printf("%s", str);
 	close (fd);
 	return (0);
-} */
+} 

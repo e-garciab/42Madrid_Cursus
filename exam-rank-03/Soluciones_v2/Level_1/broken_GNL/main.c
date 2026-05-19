@@ -1,18 +1,42 @@
 #include "get_next_line.h"
 
-int main(void)
+int main (void)
 {
-    int i;
-    char *str; 
-    int fd; 
+    char *str;
+    int fd;
+    int i = 1;
 
-    fd= open("./test.txt", O_RDONLY);
-    while((str = get_next_line(fd)) != NULL)
+    fd = open("./test2.txt", O_RDONLY);
+    while ((str = get_next_line(fd)) != NULL)
     {
-        printf("Linea leida: %s", str);
+        printf("Linea %d: %s", i,str);
         free(str);
+        i++;
     }
-    printf("Linea leida: %s\n", str);
-    close (fd);
-    return(1);
+    close(fd);
+    return(0);
 }
+
+
+
+// #include "get_next_line.h"
+
+// int main (void)
+// {
+//     int fd = open("./test.txt", O_RDONLY);
+//     //int fd = open("./test1.txt", O_RDONLY);
+//     //int fd = open("./test2.txt", O_RDONLY);
+//     //int fd = -8;
+//     char *str; 
+//     int line_counter = 1;
+
+//     while ((str = get_next_line(fd)) != NULL)
+//     {
+//         printf("Line %d: %s\n", line_counter, str);
+//         free(str);
+//         line_counter++;
+//     }
+//     printf("Line %d: %s\n", line_counter, str);
+//     close (fd);
+//     return(0);
+// }
