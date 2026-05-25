@@ -27,6 +27,8 @@ void ft_filter (char *result, size_t len, char *target)
     size_t i;
 
     target_len = strlen(target);
+    if(target_len == 0)
+        return;
     pos = result;
     while((found = memmem(pos, len - (pos - result), target, target_len)) != NULL) // revisar!! (e lugar de len es len - (pos - buf))
     {
@@ -44,14 +46,20 @@ void ft_filter (char *result, size_t len, char *target)
 
 int main (int argc, char *argv[])
 {
-    int bytes;
+    size_t bytes;
     size_t total;
-    char buffer[BUFFER_SIZE];
+    char *buffer;
     char *tmp;
     char *result;
 
     if (argc != 2 || argv[1][0] == '\0') //valida args, si el usuario no pasa exactamente 1 argumento o el arg es una cadena vacía, sale con error y devuelve 1
         return(1);
+    buffer = malloc(BUFFER_SIZE +1);
+    if(!buffer)
+    {
+        perror("Error");
+        return(1);
+    }
     total = 0;
     result = NULL;
     while ((bytes = read(0, buffer, BUFFER_SIZE)) > 0)
@@ -76,6 +84,7 @@ int main (int argc, char *argv[])
     if (!result) // no se leyó nada (stdin vacío)
         return(0);
     ft_filter(result,total, argv[1]);
+    free(buffer);
     free(result);
     return(0);
 }
